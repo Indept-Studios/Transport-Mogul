@@ -1,0 +1,30 @@
+# Godot-specific
+.import/
+.export/
+*.translation
+*.godot/editor/
+*.godot/imported/
+
+# Mono / C# (falls genutzt)
+.mono/
+data_*/
+*.csproj
+*.sln
+
+# Build / Export outputs
+bin/
+build/
+dist/
+export/
+exports/
+
+# OS / Editor junk
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# IDEs
+.vscode/
+.idea/
