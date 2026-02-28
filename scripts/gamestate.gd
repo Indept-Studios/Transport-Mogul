@@ -7,8 +7,8 @@ const SAVE_PATH := "user://savegame.json"
 const SAVE_VERSION := 1
 
 var contrac_service: Contract_Service = null
-var money: int = 500
-var reputation: int = 0
+var money: int = Constants.START_MONEY
+var reputation: int = Constants.START_REPUTATION
 var vehicles: Array = []
 
 func add_vehicle(vehicle: Vehicle):
@@ -44,6 +44,17 @@ func save_game() -> bool:
 	file.store_string(json)
 	file.close()
 	return true
+
+func has_save() -> bool:
+	return FileAccess.file_exists(SAVE_PATH)
+	
+func reset_game() -> void:
+	money = Constants.START_MONEY
+	reputation = Constants.START_REPUTATION
+	vehicles.clear()
+	Vehicle._next_id = 1
+	emit_signal("resources_changed")
+	emit_signal("vehicles_changed")
 
 func load_game() -> bool:
 	if not FileAccess.file_exists(SAVE_PATH):

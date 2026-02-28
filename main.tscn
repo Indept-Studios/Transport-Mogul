@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://ev67uydlg25a" path="res://scripts/game_manager.gd" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://dp1sg0m7i0ryv" path="res://scripts/ui.gd" id="2_0xm2m"]
 [ext_resource type="Script" uid="uid://c1jkutauox0qq" path="res://scripts/contract_service.gd" id="2_h2yge"]
+[ext_resource type="Script" uid="uid://dlin4l4bvuis" path="res://scripts/main_menu.gd" id="4_1bvp3"]
 
 [node name="Main" type="Node2D" unique_id=1862933768]
 
@@ -128,5 +129,42 @@ custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 
 [node name="VehicleContainer" type="Node" parent="." unique_id=1588014186]
+
+[node name="MainMenu" type="CanvasLayer" parent="." unique_id=2107936635]
+script = ExtResource("4_1bvp3")
+
+[node name="PanelContainer" type="PanelContainer" parent="MainMenu" unique_id=889642874]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu/PanelContainer" unique_id=747931698]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="Label" type="Label" parent="MainMenu/PanelContainer/VBoxContainer" unique_id=1012568929]
+layout_mode = 2
+text = "
+Transport Mogul
+"
+horizontal_alignment = 1
+
+[node name="ContinueButton" type="Button" parent="MainMenu/PanelContainer/VBoxContainer" unique_id=1635368277]
+layout_mode = 2
+text = "Continue"
+
+[node name="NewGameButton" type="Button" parent="MainMenu/PanelContainer/VBoxContainer" unique_id=1473957950]
+layout_mode = 2
+text = "New Game"
+
+[node name="QuitButton" type="Button" parent="MainMenu/PanelContainer/VBoxContainer" unique_id=508041522]
+layout_mode = 2
+text = "Quit"
 
 [connection signal="pressed" from="UI/Button" to="GameManager" method="_on_button_pressed"]

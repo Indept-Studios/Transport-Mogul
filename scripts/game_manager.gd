@@ -7,12 +7,6 @@ func _ready():
 	Gamestate.vehicles_changed.connect(_on_vehicles_changed)
 
 func _process(delta):
-	print("process running")
-	var t := 0.0
-	t += delta
-	if t > 1.0:
-		t = 0.0
-		print("delta:", delta, "time_scale:", Engine.time_scale, "paused:", get_tree().paused)
 	for vehicle in Gamestate.vehicles:
 		if not vehicle.is_available:
 			vehicle.remaining_time -= delta
@@ -54,12 +48,21 @@ func add_money(amount: int):
 func add_reputation(amount: int):
 	Gamestate.add_reputation(amount)
 
+func start_new_game() -> void:
+	Gamestate.reset_game()
+	add_vehicle(create_vehicle())
+	Gamestate.contrac_service.generate_contracts_for(Gamestate.vehicles[0])
+
+func start_from_loaded_game() -> void:
+	_on_vehicles_changed()
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("save_game"):
 		Gamestate.save_game()
 		get_viewport().set_input_as_handled()
 	if event.is_action_pressed("load_game"):
 		if Gamestate.load_game():
+			start_from_loaded_game()
 			Engine.time_scale = 1.0
 			get_tree().paused = false
 			_on_vehicles_changed()
