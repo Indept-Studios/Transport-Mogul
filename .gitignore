@@ -28,3 +28,12 @@ Thumbs.db
 # IDEs
 .vscode/
 .idea/
+
+# Godot internal IDs
+*.uid
+
+# Temporary files
+*.tmp
+
+# Godot editor temp
+*.godot/
