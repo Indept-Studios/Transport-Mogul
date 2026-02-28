@@ -17,6 +17,9 @@ func _refresh():
 	game_ui.visible = false
 	visible = true
 
+func show_menu():
+	_refresh()
+
 func _start_game():
 	game_ui.visible = true
 	visible = false

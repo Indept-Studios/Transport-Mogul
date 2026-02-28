@@ -4,8 +4,9 @@
 [ext_resource type="Script" uid="uid://dp1sg0m7i0ryv" path="res://scripts/ui.gd" id="2_0xm2m"]
 [ext_resource type="Script" uid="uid://c1jkutauox0qq" path="res://scripts/contract_service.gd" id="2_h2yge"]
 [ext_resource type="Script" uid="uid://dlin4l4bvuis" path="res://scripts/main_menu.gd" id="4_1bvp3"]
+[ext_resource type="Script" uid="uid://d3ic5y7qga7vu" path="res://scripts/pause_menu.gd" id="5_lquwl"]
 
-[node name="Main" type="Node2D" unique_id=1862933768]
+[node name="Game" type="Node2D" unique_id=1862933768]
 
 [node name="GameManager" type="Node" parent="." unique_id=1569147806]
 script = ExtResource("1_ig7tw")
@@ -166,5 +167,101 @@ text = "New Game"
 [node name="QuitButton" type="Button" parent="MainMenu/PanelContainer/VBoxContainer" unique_id=508041522]
 layout_mode = 2
 text = "Quit"
+
+[node name="PauseMenu" type="CanvasLayer" parent="." unique_id=1883226723]
+script = ExtResource("5_lquwl")
+
+[node name="SaveFlash" type="ColorRect" parent="PauseMenu" unique_id=826796105]
+process_mode = 2
+z_index = 100
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 1, 0.25490198, 0.003921569)
+
+[node name="PopupLayer" type="Control" parent="PauseMenu" unique_id=1295252144]
+process_mode = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Overlay" type="ColorRect" parent="PauseMenu/PopupLayer" unique_id=824738643]
+process_mode = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.023529412, 0.023529412, 0.25882354, 1)
+
+[node name="PanelContainer" type="PanelContainer" parent="PauseMenu/PopupLayer" unique_id=1270596022]
+process_mode = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PauseMenu/PopupLayer/PanelContainer" unique_id=710870774]
+process_mode = 2
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/PopupLayer/PanelContainer/MarginContainer" unique_id=1150962843]
+process_mode = 2
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="TitelLabel" type="Label" parent="PauseMenu/PopupLayer/PanelContainer/MarginContainer/VBoxContainer" unique_id=2124142542]
+process_mode = 2
+layout_mode = 2
+text = " Game Paused "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ResumeButton" type="Button" parent="PauseMenu/PopupLayer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1904595147]
+process_mode = 2
+layout_mode = 2
+text = "Resume"
+
+[node name="SaveButton" type="Button" parent="PauseMenu/PopupLayer/PanelContainer/MarginContainer/VBoxContainer" unique_id=160529890]
+process_mode = 2
+layout_mode = 2
+text = "Save Game"
+
+[node name="LoadButton" type="Button" parent="PauseMenu/PopupLayer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1515098517]
+process_mode = 2
+layout_mode = 2
+text = "Load Game"
+
+[node name="QuitToMenuButton" type="Button" parent="PauseMenu/PopupLayer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1391805347]
+process_mode = 2
+layout_mode = 2
+text = "Quit to Main Menu"
+
+[node name="QuitGameButton" type="Button" parent="PauseMenu/PopupLayer/PanelContainer/MarginContainer/VBoxContainer" unique_id=2117210129]
+process_mode = 2
+layout_mode = 2
+text = "Quit to Desktop"
+
+[node name="QuitConfirm" type="ConfirmationDialog" parent="PauseMenu" unique_id=1999082906]
+process_mode = 2
 
 [connection signal="pressed" from="UI/Button" to="GameManager" method="_on_button_pressed"]

@@ -10,17 +10,22 @@ var contrac_service: Contract_Service = null
 var money: int = Constants.START_MONEY
 var reputation: int = Constants.START_REPUTATION
 var vehicles: Array = []
+var last_save_unix: int = 0
+var is_dirty: bool = false
 
 func add_vehicle(vehicle: Vehicle):
 	vehicles.append(vehicle)
+	is_dirty = true
 	emit_signal("vehicles_changed")
 
 func add_money(amount: int):
 	money += amount
+	is_dirty = true
 	emit_signal("resources_changed")
 
 func add_reputation(amount: int):
 	reputation += amount
+	is_dirty = true
 	emit_signal("resources_changed")
 	
 func to_dict() -> Dictionary:
@@ -31,10 +36,12 @@ func to_dict() -> Dictionary:
 		"save_version": SAVE_VERSION,
 		"money": money,
 		"reputation": reputation,
+		"last_save_unix": last_save_unix,
 		"vehicles": vehicles_dict,
 	}
 
 func save_game() -> bool:
+	last_save_unix = int(Time.get_unix_time_from_system())
 	var data := to_dict()
 	var json := JSON.stringify(data, "\t") 
 	var file := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
@@ -43,6 +50,7 @@ func save_game() -> bool:
 		return false
 	file.store_string(json)
 	file.close()
+	is_dirty = false
 	return true
 
 func has_save() -> bool:
@@ -77,7 +85,8 @@ func load_game() -> bool:
 	var ver := int(dictonary.get("save_version", 0))
 	if ver != SAVE_VERSION:
 		push_warning("Save version mismatch. Found %d expected %d" % [ver, SAVE_VERSION])
-
+	last_save_unix = int(dictonary.get("last_save_unix", 0))
+	is_dirty = false
 	money = int(dictonary.get("money", 500))
 	reputation = int(dictonary.get("reputation", 0))
 	vehicles.clear()
@@ -113,7 +122,7 @@ func load_game() -> bool:
 
 	if max_id > 0:
 		Vehicle._next_id = max_id + 1
-
+	
 	emit_signal("resources_changed")
 	emit_signal("vehicles_changed")
 	return true
