@@ -23,19 +23,29 @@ func to_dict() -> Dictionary:
 		"offers": available_contracts.map(func(c: Contract): return c.to_dict()),
 	}
 
-static func from_dict(dictonary: Dictionary) -> Vehicle:
-	var vehicle := Vehicle.new()
-	vehicle.is_available = bool(dictonary.get("is_available", true))
-	vehicle.remaining_time = float(dictonary.get("remaining_time", 0.0))
+static func from_dict(d: Dictionary) -> Vehicle:
+	var v := Vehicle.new()
 
-	var cc = dictonary.get("current_contract", null)
-	vehicle.current_contract = Contract.from_dict(cc) if (cc is Dictionary) else null
+	var state_v: Variant = d.get("state", {})
+	if state_v is Dictionary:
+		var state: Dictionary = state_v
+		v.is_available = bool(state.get("is_available", true))
+		v.remaining_time = float(state.get("remaining_time", 0.0))
+	else:
+		v.is_available = bool(d.get("is_available", true))
+		v.remaining_time = float(d.get("remaining_time", 0.0))
 
-	vehicle.available_contracts.clear()
-	var offers = dictonary.get("available_contracts", [])
-	if offers is Array:
-		for item in offers:
-			if item is Dictionary:
-				vehicle.available_contracts.append(Contract.from_dict(item))
+	var cc_v: Variant = d.get("current_contract", null)
+	if cc_v is Dictionary:
+		v.current_contract = Contract.from_dict(cc_v as Dictionary)
+	else:
+		v.current_contract = null
 
-	return vehicle
+	v.available_contracts.clear()
+	var offers_v: Variant = d.get("offers", [])
+	if offers_v is Array:
+		for item_v in (offers_v as Array):
+			if item_v is Dictionary:
+				v.available_contracts.append(Contract.from_dict(item_v as Dictionary))
+
+	return v

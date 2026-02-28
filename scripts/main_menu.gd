@@ -28,7 +28,6 @@ func _on_continue_pressed():
 
 func _on_new_game_pressed():
 	game_manager.start_new_game()
-	Gamestate.save_game()
 	_start_game()
 
 func _on_quit_pressed():
