@@ -9,6 +9,7 @@ const SAVE_VERSION := 1
 var contrac_service: Contract_Service = null
 var money: int = Constants.START_MONEY
 var reputation: int = Constants.START_REPUTATION
+var tier: int = Constants.START_TIER
 var vehicles: Array = []
 var last_save_unix: int = 0
 var is_dirty: bool = false
@@ -27,7 +28,21 @@ func add_reputation(amount: int):
 	reputation += amount
 	is_dirty = true
 	emit_signal("resources_changed")
-	
+
+func get_reputation_tier() -> int:
+	if Gamestate.reputation < 50:
+		return 1
+	elif Gamestate.reputation < 200:
+		return 2
+	elif Gamestate.reputation < 500:
+		return 3
+	elif Gamestate.reputation < 2000:
+		return 4
+	elif Gamestate.reputation < 5000:
+		return 5
+	else:
+		return 6
+
 func to_dict() -> Dictionary:
 	var vehicles_dict := {}
 	for v: Vehicle in vehicles:
@@ -38,6 +53,7 @@ func to_dict() -> Dictionary:
 		"reputation": reputation,
 		"last_save_unix": last_save_unix,
 		"vehicles": vehicles_dict,
+		"tier_level": tier,
 	}
 
 func save_game() -> bool:
@@ -89,6 +105,7 @@ func load_game() -> bool:
 	is_dirty = false
 	money = int(dictonary.get("money", 500))
 	reputation = int(dictonary.get("reputation", 0))
+	tier = int(dictonary.get("tier_level", 0))
 	vehicles.clear()
 
 	var vs: Variant = dictonary.get("vehicles", null)

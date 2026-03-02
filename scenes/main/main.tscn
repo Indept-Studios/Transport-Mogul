@@ -1,21 +1,23 @@
 [gd_scene format=3 uid="uid://bjb8s58i6o2ov"]
 
-[ext_resource type="Script" uid="uid://ev67uydlg25a" path="res://scripts/game_manager.gd" id="1_ig7tw"]
-[ext_resource type="Script" uid="uid://dp1sg0m7i0ryv" path="res://scripts/ui.gd" id="2_0xm2m"]
-[ext_resource type="Script" uid="uid://c1jkutauox0qq" path="res://scripts/contract_service.gd" id="2_h2yge"]
-[ext_resource type="Script" uid="uid://dlin4l4bvuis" path="res://scripts/main_menu.gd" id="4_1bvp3"]
-[ext_resource type="Script" uid="uid://d3ic5y7qga7vu" path="res://scripts/pause_menu.gd" id="5_lquwl"]
+[ext_resource type="Script" uid="uid://ev67uydlg25a" path="res://scripts/core/game_manager.gd" id="1_6q06x"]
+[ext_resource type="Script" uid="uid://c1jkutauox0qq" path="res://scripts/core/contract_service.gd" id="2_ow5a4"]
+[ext_resource type="Script" uid="uid://dp1sg0m7i0ryv" path="res://scripts/ui/ui.gd" id="3_hujxm"]
+[ext_resource type="PackedScene" uid="uid://c2rgh1g0l64ud" path="res://scenes/game/vehicle_card.tscn" id="4_ow5a4"]
+[ext_resource type="Script" uid="uid://dlin4l4bvuis" path="res://scripts/ui/main_menu.gd" id="4_yyfjg"]
+[ext_resource type="Script" uid="uid://d3ic5y7qga7vu" path="res://scripts/ui/pause_menu.gd" id="5_b1x3f"]
 
 [node name="Game" type="Node2D" unique_id=1862933768]
 
 [node name="GameManager" type="Node" parent="." unique_id=1569147806]
-script = ExtResource("1_ig7tw")
+script = ExtResource("1_6q06x")
 
 [node name="Contract_Service" type="Node" parent="GameManager" unique_id=316850966]
-script = ExtResource("2_h2yge")
+script = ExtResource("2_ow5a4")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1126195647]
-script = ExtResource("2_0xm2m")
+script = ExtResource("3_hujxm")
+vehicle_card_scene = ExtResource("4_ow5a4")
 
 [node name="Button" type="Button" parent="UI" unique_id=1205747134]
 anchors_preset = 8
@@ -132,7 +134,7 @@ layout_mode = 2
 [node name="VehicleContainer" type="Node" parent="." unique_id=1588014186]
 
 [node name="MainMenu" type="CanvasLayer" parent="." unique_id=2107936635]
-script = ExtResource("4_1bvp3")
+script = ExtResource("4_yyfjg")
 
 [node name="PanelContainer" type="PanelContainer" parent="MainMenu" unique_id=889642874]
 anchors_preset = 15
@@ -169,7 +171,7 @@ layout_mode = 2
 text = "Quit"
 
 [node name="PauseMenu" type="CanvasLayer" parent="." unique_id=1883226723]
-script = ExtResource("5_lquwl")
+script = ExtResource("5_b1x3f")
 
 [node name="SaveFlash" type="ColorRect" parent="PauseMenu" unique_id=826796105]
 process_mode = 2

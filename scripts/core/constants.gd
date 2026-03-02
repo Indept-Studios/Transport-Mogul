@@ -6,6 +6,7 @@ const DEBUGFLAG = true
 #region Start
 const START_MONEY = 500
 const START_REPUTATION = 0
+const START_TIER  = 0
 #endregion
 
 #region Contract

@@ -67,6 +67,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			get_tree().paused = false
 			_on_vehicles_changed()
 		get_viewport().set_input_as_handled()
+		
+
 #endregion
 
 #region Vehicle

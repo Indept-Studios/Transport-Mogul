@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c2rgh1g0l64ud"]
 
-[ext_resource type="Script" uid="uid://r5qh8tju5wt" path="res://scripts/vehicle_card.gd" id="1_1mnrt"]
+[ext_resource type="Script" uid="uid://r5qh8tju5wt" path="res://scripts/ui/vehicle_card.gd" id="1_1mnrt"]
 
 [node name="VehicleCard" type="Panel" unique_id=408289917]
 custom_minimum_size = Vector2(200, 150)

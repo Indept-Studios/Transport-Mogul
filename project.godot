@@ -22,7 +22,7 @@ Constants="*uid://dfdi21ywe4wi7"
 
 [display]
 
-window/stretch/mode="canvas_items"
+window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 
 [input]

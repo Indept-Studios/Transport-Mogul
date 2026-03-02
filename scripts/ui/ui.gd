@@ -14,10 +14,13 @@ extends CanvasLayer
 @onready var game_manager: Node = $"../GameManager"
 @onready var bottom_container: Control = $BottomContainer
 
-var vehicle_card_scene = preload("res://scenes/vehicle_card.tscn")
+@export var vehicle_card_scene: PackedScene
 var current_vehicle: Vehicle = null
 
 func _ready():
+	var card = vehicle_card_scene.instantiate()
+	if vehicle_card_scene == null:
+		return
 	Gamestate.resources_changed.connect(update_resources)
 	Gamestate.vehicles_changed.connect(rebuild_vehicle_cards)
 
