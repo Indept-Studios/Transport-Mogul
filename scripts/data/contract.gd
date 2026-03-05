@@ -4,6 +4,7 @@ extends RefCounted
 var duration: float = 0.0
 var reward: int = 0
 var reputation_gain: int = 0
+var type: String = "standard"
 var contract_tier: int  = Gamestate.get_reputation_tier()
 
 func to_dict() -> Dictionary:
@@ -11,6 +12,7 @@ func to_dict() -> Dictionary:
 		"duration": duration,
 		"reward": reward,
 		"reputation_gain": reputation_gain,
+		"type": type,
 	}
 
 static func from_dict(dictonary: Dictionary) -> Contract:
@@ -18,4 +20,5 @@ static func from_dict(dictonary: Dictionary) -> Contract:
 	contract.duration = float(dictonary.get("duration", 0.0))
 	contract.reward = int(dictonary.get("reward", 0))
 	contract.reputation_gain = int(dictonary.get("reputation_gain", 0))
+	contract.type = str(dictonary.get("type", "standard"))
 	return contract

@@ -37,9 +37,18 @@ func _pick_offer_tier(base_tier: int) -> int:
 			return base_tier
 		return min(base_tier + 1, 6)
 
+func _pick_contract_type(tier: int) -> String:
+	var p_express := 0.10
+	if tier >= 4:
+		p_express = 0.15
+	if randf() < p_express:
+		return "express"
+	return "standard"
+
 func generate_contract(tier: int) -> Contract:
 	var c := Contract.new()
-
+	c.type = "standard"
+	c.type = _pick_contract_type(tier)
 	var reward_multiplier: float
 	var reputation_multiplier: float
 
@@ -64,8 +73,12 @@ func generate_contract(tier: int) -> Contract:
 			reputation_multiplier = 1.6
 
 	var r := _tier_duration_range(tier)
+	
+	if c.type == "express":
+		c.duration = max(10.0, c.duration * 0.6)
+		reward_multiplier *= 1.35
+		reputation_multiplier *= 0.75
 	c.duration = round(randf_range(r.x, r.y))
-
 	c.reward = int(sqrt(c.duration) * Constants.REWARD_MODIFYER * reward_multiplier)
 	c.reputation_gain = max(1, int((c.duration / 60.0) * reputation_multiplier))
 

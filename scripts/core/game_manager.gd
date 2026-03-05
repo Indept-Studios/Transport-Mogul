@@ -14,23 +14,38 @@ func _process(delta):
 				finish_contract(vehicle)
 
 #region Contract
-
 func assign_contract(vehicle: Vehicle, contract: Contract):
 	vehicle.is_available = false
 	vehicle.current_contract = contract
 	vehicle.remaining_time = contract.duration
 	vehicle.available_contracts.clear()
+	StatusLog.add(
+	"Vehicle %d started %s contract (%s)" % [
+	vehicle.id,
+	contract.type,
+	Constants.format_duration(contract.duration)
+	],
+	"info"
+)
 
 func finish_contract(vehicle: Vehicle):
 	if vehicle.current_contract == null:
 		return
 	add_money(vehicle.current_contract.reward)
 	add_reputation(vehicle.current_contract.reputation_gain)
-	StatusLog.add("StatusLog online", "info")
+	StatusLog.add(
+	"Vehicle %d finished %s contract: +$%d +%d Ruf" % [
+	vehicle.id,
+	vehicle.current_contract.type,
+	vehicle.current_contract.reward,
+	vehicle.current_contract.reputation_gain
+	],
+	"success"
+	)
 	vehicle.is_available = true
 	vehicle.current_contract = null
 	vehicle.remaining_time = 0.0
-
+	
 	Gamestate.contrac_service.generate_contracts_for(vehicle)
 
 func _on_vehicles_changed():
@@ -78,10 +93,12 @@ func add_vehicle(vehicle: Vehicle) -> void:
 
 func buy_vehicle():
 	if Gamestate.money < Constants.VEHICLE_COST:
-		print("not enough money")
+		StatusLog.add("Not enough money to buy vehicle ($%d required)" % Constants.VEHICLE_COST, "warn")
 		return
 	Gamestate.add_money(-Constants.VEHICLE_COST)
-	add_vehicle(create_vehicle())
+	var v := create_vehicle()
+	add_vehicle(v)
+	StatusLog.add("Fahrzeug #%d gekauft: -$%d" % [v.id, Constants.VEHICLE_COST], "info")
 
 func create_vehicle() -> Vehicle:
 	return Vehicle.new()

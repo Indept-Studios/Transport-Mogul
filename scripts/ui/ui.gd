@@ -90,7 +90,22 @@ func _show_contract_popup(vehicle: Vehicle) -> void:
 		pass
 	for i in range(3):
 		var c: Contract = vehicle.available_contracts[i]
-		contract_buttons[i].text = "%s | $%d | +%d Ruf" % [	Constants.format_duration(c.duration), c.reward, c.reputation_gain]
+		var type_part := ""
+		if Gamestate.get_reputation_tier() >= 2:
+			if Gamestate.reputation >= 50:
+				var tag := "STD"
+				if c.type == "express":
+					tag = "EXP"
+				type_part = tag + " | "
+			else:
+				type_part = c.type + " | "
+
+		contract_buttons[i].text = "%s | %s$%d | +%d Ruf" % [
+			Constants.format_duration(c.duration),
+			type_part,
+			c.reward,
+			c.reputation_gain
+		]
 		contract_buttons[i].disabled = false
 
 func _on_contract_button_pressed(index: int) -> void:

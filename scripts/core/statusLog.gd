@@ -38,3 +38,9 @@ func get_latest(n: int) -> Array[Dictionary]:
 	if count <= 0:
 		return []
 	return entries.slice(entries.size() - count, entries.size())
+
+func to_message_array() -> Array[String]:
+	var out: Array[String] = []
+	for e in entries:
+		out.append(str(e.get("msg", "")))
+	return out

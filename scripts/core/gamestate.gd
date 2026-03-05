@@ -54,6 +54,7 @@ func to_dict() -> Dictionary:
 		"last_save_unix": last_save_unix,
 		"vehicles": vehicles_dict,
 		"tier_level": tier,
+		"status_log": StatusLog.to_message_array(),
 	}
 
 func save_game() -> bool:
@@ -67,6 +68,7 @@ func save_game() -> bool:
 	file.store_string(json)
 	file.close()
 	is_dirty = false
+	StatusLog.add("Game successfully saved", "success")
 	return true
 
 func has_save() -> bool:
@@ -142,4 +144,5 @@ func load_game() -> bool:
 	
 	emit_signal("resources_changed")
 	emit_signal("vehicles_changed")
+	StatusLog.add("Savegame loaded", "success")
 	return true
