@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Gamestate="*uid://dab04mtxw4ubo"
 Constants="*uid://dfdi21ywe4wi7"
+StatusLog="*uid://dfugea643ovdh"
 
 [display]
 

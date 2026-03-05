@@ -15,10 +15,12 @@ extends CanvasLayer
 @onready var bottom_container: Control = $BottomContainer
 
 @export var vehicle_card_scene: PackedScene
+@export var status_entry_scene: PackedScene
+
+@onready var status_label: Label = $BottomContainer/StatusArea/StatusBar/HBoxContainer/StatusLabel
 var current_vehicle: Vehicle = null
 
 func _ready():
-	var card = vehicle_card_scene.instantiate()
 	if vehicle_card_scene == null:
 		return
 	Gamestate.resources_changed.connect(update_resources)
@@ -35,11 +37,21 @@ func _ready():
 	rebuild_vehicle_cards()
 	overlay.gui_input.connect(_on_overlay_gui_input)
 	popup_layer.visible = false
-	
+	StatusLog.changed.connect(_on_status_changed)
+
+	_on_status_changed()
+
 func _process(delta):
 	for child in holder.get_children():
 		if child is VehicleCard:
 			child.update_view()
+
+func _on_status_changed() -> void:
+	var latest := StatusLog.get_latest(1)
+	if latest.size() == 0:
+		status_label.text = ""
+	else:
+		status_label.text = str(latest[0].get("msg", ""))
 
 func _on_overlay_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
@@ -48,9 +60,7 @@ func _on_overlay_gui_input(event: InputEvent) -> void:
 func _apply_bottom_height() -> void:
 	var h := get_viewport().get_visible_rect().size.y
 	var target := int(h * 0.2) # 1/5
-
 	target = clamp(target, 140, 260)
-
 	bottom_container.custom_minimum_size.y = target
 
 func update_resources():

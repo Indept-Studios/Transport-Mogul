@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c2rgh1g0l64ud" path="res://scenes/game/vehicle_card.tscn" id="4_ow5a4"]
 [ext_resource type="Script" uid="uid://dlin4l4bvuis" path="res://scripts/ui/main_menu.gd" id="4_yyfjg"]
 [ext_resource type="Script" uid="uid://d3ic5y7qga7vu" path="res://scripts/ui/pause_menu.gd" id="5_b1x3f"]
+[ext_resource type="PackedScene" uid="uid://d02pueqfka4i3" path="res://scenes/ui/status_entry.tscn" id="5_hujxm"]
 
 [node name="Game" type="Node2D" unique_id=1862933768]
 
@@ -18,6 +19,7 @@ script = ExtResource("2_ow5a4")
 [node name="UI" type="CanvasLayer" parent="." unique_id=1126195647]
 script = ExtResource("3_hujxm")
 vehicle_card_scene = ExtResource("4_ow5a4")
+status_entry_scene = ExtResource("5_hujxm")
 
 [node name="Button" type="Button" parent="UI" unique_id=1205747134]
 anchors_preset = 8
@@ -51,25 +53,48 @@ focus_neighbor_right = NodePath("../ReputationLabel")
 [node name="ReputationLabel" type="Label" parent="UI/TopBar" unique_id=1033585117]
 layout_mode = 2
 
-[node name="BottomContainer" type="PanelContainer" parent="UI" unique_id=1640279269]
+[node name="BottomContainer" type="VBoxContainer" parent="UI" unique_id=402076556]
 custom_minimum_size = Vector2(0, 110)
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -150.0
 grow_horizontal = 2
 grow_vertical = 0
+size_flags_horizontal = 4
+alignment = 1
 
 [node name="VehicleArea" type="ScrollContainer" parent="UI/BottomContainer" unique_id=1067240560]
 custom_minimum_size = Vector2(200, 150)
 layout_mode = 2
-size_flags_vertical = 9
 vertical_scroll_mode = 0
 
 [node name="VehicleHolder" type="HBoxContainer" parent="UI/BottomContainer/VehicleArea" unique_id=1077905537]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 12
+
+[node name="StatusArea" type="Control" parent="UI/BottomContainer" unique_id=1161666777]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="StatusBar" type="PanelContainer" parent="UI/BottomContainer/StatusArea" unique_id=404513614]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/BottomContainer/StatusArea/StatusBar" unique_id=260040462]
+layout_mode = 2
+
+[node name="StatusLabel" type="Label" parent="UI/BottomContainer/StatusArea/StatusBar/HBoxContainer" unique_id=1692045220]
+layout_mode = 2
+size_flags_vertical = 1
 
 [node name="PopupLayer" type="Control" parent="UI" unique_id=266969055]
 layout_mode = 3
@@ -143,6 +168,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Overlay" type="ColorRect" parent="MainMenu/PanelContainer" unique_id=1102209721]
+process_mode = 2
+layout_mode = 2
+color = Color(0.07309995, 0.07301121, 0.47293383, 1)
+
 [node name="VBoxContainer" type="VBoxContainer" parent="MainMenu/PanelContainer" unique_id=747931698]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
@@ -201,7 +231,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.023529412, 0.023529412, 0.25882354, 1)
+color = Color(0.07309995, 0.07301121, 0.47293383, 1)
 
 [node name="PanelContainer" type="PanelContainer" parent="PauseMenu/PopupLayer" unique_id=1270596022]
 process_mode = 2

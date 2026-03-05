@@ -19,7 +19,7 @@ func to_dict() -> Dictionary:
 			"is_available": is_available,
 			"remaining_time": remaining_time,
 		},
-		"current_contract": current_contract.to_dict() if current_contract != null else null,
+		"current_contract": current_contract.to_dict() if current_contract != null else {},
 		"offers": available_contracts.map(func(c: Contract): return c.to_dict()),
 	}
 

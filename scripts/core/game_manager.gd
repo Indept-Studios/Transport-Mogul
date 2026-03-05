@@ -26,7 +26,7 @@ func finish_contract(vehicle: Vehicle):
 		return
 	add_money(vehicle.current_contract.reward)
 	add_reputation(vehicle.current_contract.reputation_gain)
-
+	StatusLog.add("StatusLog online", "info")
 	vehicle.is_available = true
 	vehicle.current_contract = null
 	vehicle.remaining_time = 0.0
@@ -67,7 +67,6 @@ func _unhandled_input(event: InputEvent) -> void:
 			get_tree().paused = false
 			_on_vehicles_changed()
 		get_viewport().set_input_as_handled()
-		
 
 #endregion
 
