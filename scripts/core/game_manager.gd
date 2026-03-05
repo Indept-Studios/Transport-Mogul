@@ -49,6 +49,7 @@ func add_reputation(amount: int):
 	Gamestate.add_reputation(amount)
 
 func start_new_game() -> void:
+	StatusLog.clear()
 	Gamestate.reset_game()
 	add_vehicle(create_vehicle())
 	Gamestate.contrac_service.generate_contracts_for(Gamestate.vehicles[0])

@@ -17,7 +17,7 @@ extends CanvasLayer
 @export var vehicle_card_scene: PackedScene
 @export var status_entry_scene: PackedScene
 
-@onready var status_label: Label = $BottomContainer/StatusArea/StatusBar/HBoxContainer/StatusLabel
+@onready var status_label: Label = $BottomContainer/StatusArea/StatusBar/StatusLabel
 var current_vehicle: Vehicle = null
 
 func _ready():
@@ -90,7 +90,7 @@ func _show_contract_popup(vehicle: Vehicle) -> void:
 		pass
 	for i in range(3):
 		var c: Contract = vehicle.available_contracts[i]
-		contract_buttons[i].text = "%ds | $%d | +%d Ruf" % [int(c.duration), c.reward, c.reputation_gain]
+		contract_buttons[i].text = "%s | $%d | +%d Ruf" % [	Constants.format_duration(c.duration), c.reward, c.reputation_gain]
 		contract_buttons[i].disabled = false
 
 func _on_contract_button_pressed(index: int) -> void:

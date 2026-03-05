@@ -7,11 +7,16 @@ func generate_contracts_for(vehicle: Vehicle) -> void:
 	for i in 3:
 		var offer_tier := _pick_offer_tier(base_tier)
 		vehicle.available_contracts.append(generate_contract(offer_tier))
+	vehicle.available_contracts.sort_custom(func(a: Contract, b: Contract) -> bool:
+		if a.duration == b.duration:
+			return a.reward < b.reward
+		return a.duration < b.duration
+	)
 
 func _tier_duration_range(tier: int) -> Vector2:
 	match tier:
-		1: return Vector2(10.0, 180.0)
-		2: return Vector2(180.0, 900.0)
+		1: return Vector2(10.0, 30.0)
+		2: return Vector2(300.0, 900.0)
 		3: return Vector2(900.0, 3600.0)
 		4: return Vector2(3600.0, 14400.0)
 		5: return Vector2(14400.0, 43200.0)
@@ -23,11 +28,13 @@ func _pick_offer_tier(base_tier: int) -> int:
 	if base_tier <= 1:
 		return 1
 
-	if roll < 0.60:
+	if roll < 0.70:
 		return base_tier
-	elif roll < 0.90:
+	elif roll < 0.95:
 		return base_tier - 1
 	else:
+		if Gamestate.vehicles.size() < 3:
+			return base_tier
 		return min(base_tier + 1, 6)
 
 func generate_contract(tier: int) -> Contract:
@@ -59,7 +66,7 @@ func generate_contract(tier: int) -> Contract:
 	var r := _tier_duration_range(tier)
 	c.duration = round(randf_range(r.x, r.y))
 
-	c.reward = int(c.duration * Constants.REWARD_MODIFYER * reward_multiplier)
-	c.reputation_gain = int((c.duration / 60.0) * reputation_multiplier)
+	c.reward = int(sqrt(c.duration) * Constants.REWARD_MODIFYER * reward_multiplier)
+	c.reputation_gain = max(1, int((c.duration / 60.0) * reputation_multiplier))
 
 	return c

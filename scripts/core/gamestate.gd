@@ -30,7 +30,7 @@ func add_reputation(amount: int):
 	emit_signal("resources_changed")
 
 func get_reputation_tier() -> int:
-	if Gamestate.reputation < 50:
+	if Gamestate.reputation < 10:
 		return 1
 	elif Gamestate.reputation < 200:
 		return 2

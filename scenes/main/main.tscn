@@ -68,6 +68,7 @@ alignment = 1
 [node name="VehicleArea" type="ScrollContainer" parent="UI/BottomContainer" unique_id=1067240560]
 custom_minimum_size = Vector2(200, 150)
 layout_mode = 2
+size_flags_vertical = 8
 vertical_scroll_mode = 0
 
 [node name="VehicleHolder" type="HBoxContainer" parent="UI/BottomContainer/VehicleArea" unique_id=1077905537]
@@ -76,7 +77,7 @@ size_flags_vertical = 3
 theme_override_constants/separation = 12
 
 [node name="StatusArea" type="Control" parent="UI/BottomContainer" unique_id=1161666777]
-custom_minimum_size = Vector2(0, 30)
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
 [node name="StatusBar" type="PanelContainer" parent="UI/BottomContainer/StatusArea" unique_id=404513614]
@@ -89,12 +90,8 @@ offset_top = -23.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/BottomContainer/StatusArea/StatusBar" unique_id=260040462]
+[node name="StatusLabel" type="Label" parent="UI/BottomContainer/StatusArea/StatusBar" unique_id=1692045220]
 layout_mode = 2
-
-[node name="StatusLabel" type="Label" parent="UI/BottomContainer/StatusArea/StatusBar/HBoxContainer" unique_id=1692045220]
-layout_mode = 2
-size_flags_vertical = 1
 
 [node name="PopupLayer" type="Control" parent="UI" unique_id=266969055]
 layout_mode = 3

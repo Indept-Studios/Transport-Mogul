@@ -29,5 +29,5 @@ func update_view():
 		status_label.text = "Verfügbar"
 		modulate = Color.WHITE
 	else:
-		status_label.text = "Unterwegs: %.1fs" % vehicle.remaining_time
+		status_label.text = "Unterwegs: %s" % Constants.format_duration(vehicle.remaining_time)
 		modulate = Color(0.4,0.4,0.4)
