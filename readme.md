@@ -1,6 +1,6 @@
-# Transport Mogul 
-## Game Design Document (GDD)  
-### Version 0.1 (MVP)
+# Transport Mogul
+## Game Design Document (GDD)
+### Version 0.1 (Current MVP)
 
 ---
 
@@ -13,10 +13,12 @@ Transport Mogul
 Wirtschafts-/Management-Spiel (2D, minimalistisch)
 
 ## 1.3 Kernidee
-Der Spieler leitet ein kleines Transportunternehmen.  
-Er nimmt Aufträge an, schickt Fahrzeuge auf zeitbasierte Missionen und erwirtschaftet Geld und Ruf.  
-Durch steigenden Ruf werden lukrativere Aufträge freigeschaltet.  
-Mit ausreichend Kapital können zusätzliche Fahrzeuge erworben werden.
+Der Spieler leitet ein kleines Transportunternehmen.
+
+Er nimmt Aufträge an, schickt Fahrzeuge auf zeitbasierte Missionen und verdient Geld sowie Ruf.  
+Mit steigendem Ruf werden lukrativere Aufträge freigeschaltet.
+
+Mit ausreichend Kapital können zusätzliche Fahrzeuge gekauft werden, wodurch mehrere Aufträge parallel abgearbeitet werden können.
 
 ---
 
@@ -24,29 +26,32 @@ Mit ausreichend Kapital können zusätzliche Fahrzeuge erworben werden.
 
 ## 2.1 Ziel der Version 0.1
 
-- Implementierung eines stabilen Kern-Gameplay-Loops
+- Stabiler Core-Gameplay-Loop
 - Klare Progression über Geld und Ruf
-- Erweiterbare technische Struktur
-- Begrenzter Scope zur sicheren Fertigstellung
+- Skalierbare Auftragsgenerierung
+- Erweiterbare technische Architektur
+- Minimalistische, aber informative UI
 
 ## 2.2 Nicht-Ziele (bewusst ausgeschlossen)
 
-- Simulation einer Weltkarte
+Diese Systeme sind **nicht Teil von Version 0.1**:
+
+- Weltkarte
 - Komplexe Wirtschaftssysteme
-- Risiko- oder Schadenssysteme
-- Fahrzeugtypen oder Upgrades
-- Narrative Elemente
-- Ereignissysteme
+- Schadens- oder Risikosysteme
+- Fahrzeug-Upgrades
+- Story oder narrative Elemente
+- Globale Ereignissysteme
 
 ---
 
 # 3. Core Gameplay Loop
 
-1. Spiel startet mit einem Fahrzeug.
-2. Für jedes verfügbare Fahrzeug werden 3 Aufträge generiert.
-3. Spieler wählt einen Auftrag.
-4. Fahrzeug ist für die Dauer des Auftrags nicht verfügbar.
-5. Nach Ablauf:
+1. Das Spiel startet mit einem Fahrzeug.
+2. Für jedes verfügbare Fahrzeug werden **3 Aufträge generiert**.
+3. Der Spieler wählt einen Auftrag.
+4. Das Fahrzeug ist während der Auftragsdauer nicht verfügbar.
+5. Nach Ablauf des Timers:
    - Geld wird gutgeschrieben
    - Ruf wird erhöht
    - Neue Aufträge werden generiert
@@ -65,69 +70,116 @@ Fahrzeuge führen Aufträge aus und generieren Einkommen.
 
 ## Eigenschaften
 
-```
+```gdscript
+id: int
 is_available: bool
 current_contract: Contract
 remaining_time: float
+available_contracts: Array
 ```
 
 ## Regeln
 
-- Ein Fahrzeug kann nur einen Auftrag gleichzeitig ausführen.
-- Während der Laufzeit ist es nicht auswählbar.
-- Nach Abschluss wird es automatisch wieder verfügbar.
-- Danach werden neue Aufträge generiert.
+- Ein Fahrzeug kann nur **einen Auftrag gleichzeitig** ausführen.
+- Während eines laufenden Auftrags kann kein neuer angenommen werden.
+- Nach Abschluss wird das Fahrzeug automatisch wieder verfügbar.
+- Anschließend werden neue Aufträge generiert.
 
 ---
 
 # 4.2 Auftrags-System
 
 ## Beschreibung
-Aufträge sind zeitbasierte Missionen mit Belohnung und Rufgewinn.
+Aufträge sind zeitbasierte Missionen mit Geld- und Rufbelohnung.
 
 ## Eigenschaften
 
-```
+```gdscript
 duration: float
 reward: int
 reputation_gain: int
+type: String
 ```
 
-## Generierung
+## Auftragsarten (Version 0.1)
 
-- Pro verfügbarem Fahrzeug werden 3 Aufträge erzeugt.
-- Dauer wird zufällig im definierten Bereich bestimmt.
-- Belohnung und Ruf skalieren mit Dauer und aktuellem Ruf.
+### Standard
+Normale Aufträge mit ausgeglichener Dauer und Belohnung.
 
-## Beispiel-Formel (MVP)
+### Express
+- Kürzere Dauer
+- Höhere Geldbelohnung
+- Weniger Rufgewinn
 
-```
-duration = randf_range(MIN_DURATION, MAX_DURATION) + reputation * 0.5
-reward = duration * MONEY_FACTOR + reputation * 2
-reputation_gain = duration / 5
-```
+Neue Auftragsarten werden im Verlauf des Spiels freigeschaltet.
 
 ---
 
-# 4.3 Zeit-System
+# 4.3 Auftragsgenerierung
 
-## Beschreibung
+Aufträge werden dynamisch basierend auf dem **Ruf-Tier** generiert.
+
+Für jedes Fahrzeug werden **3 Angebote** erstellt.
+
+Generierungsprozess:
+
+1. Bestimmung des aktuellen Ruf-Tiers
+2. Auswahl eines Auftrags-Tiers über Gewichtung
+3. Generierung der Dauer innerhalb des Tier-Bereichs
+4. Anwendung der Modifikatoren des Auftragstyps
+5. Sortierung der Aufträge nach Dauer
+
+---
+
+# 4.4 Ruf-Tier-System
+
+Der Ruf bestimmt die Qualität der verfügbaren Aufträge.
+
+Beispielhafte Schwellenwerte:
+
+```gdscript
+Tier 1:   0 – 9 reputation
+Tier 2:  10 – 199
+Tier 3: 200 – 499
+Tier 4: 500 – 1999
+Tier 5: 2000 – 4999
+Tier 6: 5000+
+```
+
+Mit höheren Tiers werden:
+
+- längere Aufträge verfügbar
+- höhere Belohnungen möglich
+- mehr Variation eingeführt
+
+---
+
+# 4.5 Zeit-System
+
 Zeit ist die zentrale Ressource des Spiels.
 
-## Anforderungen
+Eigenschaften:
 
-- Timer pro Fahrzeug oder zentral verwaltet
-- Sekundenbasiert
-- Nach Ablauf wird Abschluss-Event ausgelöst
-- Optional sichtbarer Countdown
+- Timer pro Fahrzeug
+- Sekundenbasierte Simulation
+- Automatische Abschluss-Erkennung
+- Sichtbarer Countdown im UI
+
+Zeitformatierung für bessere Lesbarkeit:
+
+```gdscript
+12s
+4m
+1h20m
+```
 
 ---
 
-# 4.4 Geld-System
+# 4.6 Geld-System
 
 ## Startwert
 
-```
+```gdscript
 START_MONEY = 500
 ```
 
@@ -139,49 +191,59 @@ START_MONEY = 500
 
 - Kauf zusätzlicher Fahrzeuge
 
+```gdscript
+VEHICLE_COST = 10000
+```
+
 ---
 
-# 4.5 Ruf-/Prestige-System
+# 4.7 Ruf-System
 
 ## Startwert
 
-```
+```gdscript
 START_REPUTATION = 0
 ```
 
-## Funktion
+Ruf wird durch erfolgreiche Aufträge erhöht.
 
-- Steigert Qualität und Dauer zukünftiger Aufträge
-- Erhöht Belohnung
-- Erhöht Ruf-Gewinn
+Ruf beeinflusst:
 
-## Skalierung (einfach, linear)
+- verfügbare Auftrags-Tiers
+- Vielfalt der Aufträge
+- Höhe der Belohnungen
 
-```
-reward_multiplier = 1 + reputation * 0.05
-```
-
-Keine exponentielle Skalierung in Version 0.1.
+Rufgewinn skaliert mit der Auftragsdauer, gewährt jedoch **mindestens 1 Rufpunkt**.
 
 ---
 
-# 4.6 Fahrzeug-Erweiterungssystem
+# 4.8 Fahrzeug-Erweiterung
 
-## Beschreibung
-Spieler kann neue Fahrzeuge kaufen.
+Spieler können neue Fahrzeuge kaufen.
 
-## Parameter
+Regeln:
 
-```
-VEHICLE_COST = 1000
-```
+- Kauf nur bei ausreichendem Geld
+- Fahrzeug wird zur Flotte hinzugefügt
+- Fahrzeuge arbeiten unabhängig voneinander
+- In Version 0.1 gibt es **keine Unterschiede zwischen Fahrzeugen**
 
-## Regeln
+---
 
-- Kauf nur möglich bei ausreichendem Geld
-- Neues Fahrzeug wird zur Fahrzeugliste hinzugefügt
-- Jedes Fahrzeug funktioniert unabhängig
-- Keine Unterschiede zwischen Fahrzeugen
+# 4.9 Status-Log-System
+
+Ein globales Statuslog speichert wichtige Ereignisse des Spiels.
+
+Beispiele:
+
+- Auftrag gestartet
+- Auftrag abgeschlossen
+- Fahrzeug gekauft
+- Spiel gespeichert / geladen
+
+Der neueste Eintrag wird im UI angezeigt.
+
+Alle Einträge werden im Speicher gehalten und beim Speichern dem Savegame beigefügt.
 
 ---
 
@@ -191,6 +253,8 @@ VEHICLE_COST = 1000
 
 # 5.1 Globale Anzeige
 
+Die obere Leiste zeigt:
+
 - Geld
 - Ruf
 
@@ -198,91 +262,173 @@ VEHICLE_COST = 1000
 
 # 5.2 Fahrzeugbereich
 
-Für jedes Fahrzeug:
+Jedes Fahrzeug zeigt:
 
-- Statusanzeige:
-  - "Verfügbar"
-  - "Unterwegs (X Sekunden)"
-- 3 Auftragsbuttons (nur wenn verfügbar)
+- Status (verfügbar / unterwegs)
+- verbleibende Auftragszeit
+- (per Popup) Auswahl von 3 Aufträgen
 
----
+Beispiel:
 
-# 5.3 Auftragsanzeige (Textformat)
-
-```
-12s | $140 | +3 Ruf
+```gdscript
+12s | $120 | +1 Rep
+4m | express | $320 | +2 Rep
 ```
 
 ---
 
-# 5.4 Kauf-Button
+# 5.3 Statusleiste
 
+Die untere Statusleiste zeigt den neuesten Spielevent.
+
+Beispiel:
+
+```gdscript
+Vehicle 2 finished express contract: +$180 +1 Rep
 ```
-Neues Fahrzeug kaufen ($1000)
+
+---
+
+# 5.4 Fahrzeug-Kauf
+
+```gdscript
+Buy new vehicle ($10000)
 ```
 
-- Deaktiviert bei unzureichendem Geld
+Der Button wird deaktiviert, wenn nicht genug Geld vorhanden ist.
 
 ---
 
-# 6. Balancing-Parameter
+# 6. Balancing-Prinzipien
 
-| Parameter         | Beispielwert |
-|------------------|--------------|
-| MIN_DURATION     | 5            |
-| MAX_DURATION     | 20           |
-| MONEY_FACTOR     | 10           |
-| REPUTATION_SCALE | 0.05         |
-| VEHICLE_COST     | 1000         |
+Das Balancing verfolgt folgende Ziele:
 
-Alle Werte sind als Konstanten definiert.
+- sanfte Progression
+- keine exponentielle Geldexplosion
+- klare Entscheidungsfindung
 
----
+Designregeln:
 
-# 7. Technische Anforderungen
-
-- Trennung von Spiel-Logik und UI
-- Fahrzeuge werden in einer Liste verwaltet
-- Aufträge als eigene Datenstruktur
-- Ereignisgesteuerter Abschluss (Signal oder Callback)
-- Mehrere Fahrzeuge parallel möglich
+- Belohnung skaliert nicht strikt linear mit Dauer
+- Rufanstieg bleibt moderat
+- Auftragsdauer wächst mit den Ruf-Tiers
+- Early Game bleibt schnell und aktiv
+- höhere Tiers entschleunigen das Spiel
 
 ---
 
-# 8. Definition of Done
+# 7. Technische Architektur
+
+Grundprinzipien:
+
+- Trennung von Game-Logik und UI
+- Fahrzeuge werden zentral verwaltet
+- Aufträge sind eigene Datenstrukturen
+- Auftragsgenerierung über Service-Klasse
+- Ereignisbasierte Updates über Signale
+
+---
+
+# 8. Save-System
+
+Der Spielstand wird als JSON gespeichert.
+
+Gespeicherte Daten:
+
+```gdscript
+money
+reputation
+vehicles
+vehicle_state
+active_contracts
+status_log_archive
+```
+
+Das Statuslog wird gespeichert, jedoch **nicht wieder geladen**.
+
+---
+
+# 9. Definition of Done (Version 0.1)
 
 Version 0.1 gilt als abgeschlossen, wenn:
 
-- Der Gameplay-Loop stabil funktioniert
-- Mehrere Fahrzeuge parallel Aufträge ausführen können
-- Geld- und Ruf-Skalierung korrekt arbeitet
-- Keine Blocker oder Logikfehler auftreten
-- Das Spiel mindestens 15 Minuten stabil spielbar ist
+- der Gameplay-Loop stabil funktioniert
+- mehrere Fahrzeuge parallel arbeiten können
+- Ruf-Tiers korrekt skalieren
+- Auftragsgenerierung zuverlässig arbeitet
+- Save/Load funktioniert
+- das Spiel mindestens **15 Minuten stabil spielbar ist**
+
+Version 0.1 soll bis 15.03.2026 fertig sein.
 
 ---
 
-# 9. Erweiterungspotenzial (nicht Teil von 0.1)
+# 10. Versions / Roadmap
 
-- Risiko- oder Schadenssystem
+Die Entwicklung erfolgt iterativ in klar definierten Versionen.
+
+---
+
+## Version 0.1 — Core Loop (MVP)
+
+**Zieltermin:** 15.03.2026
+
+Schwerpunkte:
+
+- Stabiler Gameplay-Loop
+- Fahrzeug- und Auftragssystem
+- Ruf-Tiers
+- Auftragsarten (Standard / Express)
+- Status-Log-System
+- Save/Load-System
+- Grundlegendes Balancing
+
+Diese Version stellt die **erste vollständig spielbare Grundlage** dar.
+
+---
+
+## Version 0.2 — Gameplay Depth
+
+**Zieltermin:** 15.04.2026
+
+Geplante Erweiterungen:
+
+- Weitere Auftragstypen
+- Erste Risiko- oder Ereignismechaniken
+- Verbesserte UI-Informationen
+- Besseres Balancing der Progression
+- Erweiterung des Status-Logs
+- Erste Quality-of-Life Verbesserungen
+
+Ziel dieser Version ist es, **mehr Spieltiefe und Entscheidungen** zu ermöglichen.
+
+---
+
+## Version 0.3 — World & Systems
+
+**Zieltermin:** 30.05.2026
+
+Geplante Erweiterungen:
+
+- Erste Welt- oder Regionensysteme
+- Erweiterte Fahrzeugmechaniken
+- Dynamischere Wirtschaft
+- Ereignissystem (z.B. Störungen, Marktveränderungen)
+- Erweiterte Spielstatistiken
+- Weitere UI-Verbesserungen
+
+Diese Version soll den Übergang vom **Prototyp zu einem vollwertigen Managementspiel** vorbereiten.
+
+# 11. Erweiterungspotenzial (nicht Teil von Version 0.1)
+
+Geplante Systeme für spätere Versionen:
+
+- Risiko- und Schadenssysteme
 - Fahrzeugtypen
-- Upgrades
+- Fahrzeug-Upgrades
 - Weltkarte
-- Events
-- Wirtschaftssystem
+- Wirtschaftssysteme
+- globale Events
 - Mitarbeiter
-- Kredit- oder Finanzsystem
-- Speichern/Laden
-- Audio
-
----
-
-# 10. Scope-Prinzip für Version 0.1
-
-Diese Version enthält ausschließlich:
-
-- Den Kern-Gameplay-Loop
-- Grundlegende Progression
-- Minimale UI
-- Erweiterbare Architektur
-
-Alles Weitere wird bewusst auf spätere Versionen verschoben.
+- Finanzsysteme
+- Audio und Musik
