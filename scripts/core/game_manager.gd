@@ -106,9 +106,3 @@ func create_vehicle() -> Vehicle:
 func create_start_vehicle():
 	add_vehicle(create_vehicle())
 #endregion
-
-func _on_button_pressed():
-	if Constants.DEBUGFLAG:
-		add_vehicle(create_vehicle())
-	else:
-		buy_vehicle()

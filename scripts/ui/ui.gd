@@ -10,12 +10,13 @@ extends CanvasLayer
 @onready var status_label: Label = $BottomContainer/StatusArea/StatusBar/StatusLabel
 @onready var game_manager: Node = $"../GameManager"
 @onready var contract_popup: Control = $PopupLayer
+@onready var buy_button: Button = $"BuyButton(DEBUG)"
 
 func _ready() -> void:
 	Gamestate.resources_changed.connect(update_resources)
 	Gamestate.vehicles_changed.connect(rebuild_vehicle_cards)
 	StatusLog.changed.connect(_on_status_changed)
-
+	buy_button.pressed.connect(_on_buy_pressed)
 	contract_popup.contract_selected.connect(_on_contract_selected)
 
 	update_resources()
@@ -34,6 +35,13 @@ func update_resources() -> void:
 	money_label.text = "Money: %d" % Gamestate.money
 	reputation_label.text = "Reputation: %d" % Gamestate.reputation
 	reputation_bar.value = Gamestate.reputation
+
+func _on_buy_pressed() -> void:
+	if Constants.DEBUGFLAG:
+		game_manager.add_vehicle(game_manager.create_vehicle())
+	else:
+		game_manager.buy_vehicle()
+	
 
 func rebuild_vehicle_cards() -> void:
 	for child in holder.get_children():
