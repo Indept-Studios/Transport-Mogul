@@ -16,7 +16,7 @@ func generate_contracts_for(vehicle: Vehicle) -> void:
 func _tier_duration_range(tier: int) -> Vector2:
 	match tier:
 		1: return Vector2(10.0, 30.0)
-		2: return Vector2(300.0, 900.0)
+		2: return Vector2(120.0, 900.0)
 		3: return Vector2(900.0, 3600.0)
 		4: return Vector2(3600.0, 14400.0)
 		5: return Vector2(14400.0, 43200.0)
@@ -24,10 +24,8 @@ func _tier_duration_range(tier: int) -> Vector2:
 		
 func _pick_offer_tier(base_tier: int) -> int:
 	var roll := randf()
-
 	if base_tier <= 1:
 		return 1
-
 	if roll < 0.70:
 		return base_tier
 	elif roll < 0.95:

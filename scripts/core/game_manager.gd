@@ -98,7 +98,7 @@ func buy_vehicle():
 	Gamestate.add_money(-Constants.VEHICLE_COST)
 	var v := create_vehicle()
 	add_vehicle(v)
-	StatusLog.add("Fahrzeug #%d gekauft: -$%d" % [v.id, Constants.VEHICLE_COST], "info")
+	StatusLog.add("Vehicle #%d bought: -$%d" % [v.id, Constants.VEHICLE_COST], "info")
 
 func create_vehicle() -> Vehicle:
 	return Vehicle.new()

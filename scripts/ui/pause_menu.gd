@@ -87,9 +87,9 @@ func _needs_quit_warning() -> bool:
 
 func _prompt_quit(mode: String) -> void:
 	_pending_quit_mode = mode
-	quit_confirm.dialog_text = "Seit dem letzten Speichern ist Zeit vergangen. Vor dem Beenden speichern?"
-	quit_confirm.ok_button_text = "Speichern und beenden"
-	quit_confirm.cancel_button_text = "Abbrechen"
+	quit_confirm.dialog_text = "Unsaved progress detected. Save before exiting?"
+	quit_confirm.ok_button_text = "save and exit"
+	quit_confirm.cancel_button_text = "cancle"
 	quit_confirm.popup_centered()
 
 func _on_quit_to_menu_pressed() -> void:

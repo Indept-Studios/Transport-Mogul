@@ -3,9 +3,6 @@ extends Node
 signal vehicles_changed
 signal resources_changed
 
-const SAVE_PATH := "user://savegame.json"
-const SAVE_VERSION := 1
-
 var contrac_service: Contract_Service = null
 var money: int = Constants.START_MONEY
 var reputation: int = Constants.START_REPUTATION
@@ -48,7 +45,7 @@ func to_dict() -> Dictionary:
 	for v: Vehicle in vehicles:
 		vehicles_dict[str(v.id)] = v.to_dict()
 	return {
-		"save_version": SAVE_VERSION,
+		"save_version": Constants.SAVE_VERSION,
 		"money": money,
 		"reputation": reputation,
 		"last_save_unix": last_save_unix,
@@ -61,9 +58,9 @@ func save_game() -> bool:
 	last_save_unix = int(Time.get_unix_time_from_system())
 	var data := to_dict()
 	var json := JSON.stringify(data, "\t") 
-	var file := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
+	var file := FileAccess.open(Constants.SAVE_PATH, FileAccess.WRITE)
 	if file == null:
-		push_error("Could not open save file for writing: " + SAVE_PATH)
+		push_error("Could not open save file for writing: " + Constants.SAVE_PATH)
 		return false
 	file.store_string(json)
 	file.close()
@@ -72,7 +69,7 @@ func save_game() -> bool:
 	return true
 
 func has_save() -> bool:
-	return FileAccess.file_exists(SAVE_PATH)
+	return FileAccess.file_exists(Constants.SAVE_PATH)
 	
 func reset_game() -> void:
 	money = Constants.START_MONEY
@@ -83,12 +80,12 @@ func reset_game() -> void:
 	emit_signal("vehicles_changed")
 
 func load_game() -> bool:
-	if not FileAccess.file_exists(SAVE_PATH):
+	if not FileAccess.file_exists(Constants.SAVE_PATH):
 		return false
 
-	var file := FileAccess.open(SAVE_PATH, FileAccess.READ)
+	var file := FileAccess.open(Constants.SAVE_PATH, FileAccess.READ)
 	if file == null:
-		push_error("Could not open save file for reading: " + SAVE_PATH)
+		push_error("Could not open save file for reading: " + Constants.SAVE_PATH)
 		return false
 
 	var text := file.get_as_text()
@@ -101,8 +98,8 @@ func load_game() -> bool:
 
 	var dictonary: Dictionary = parsed
 	var ver := int(dictonary.get("save_version", 0))
-	if ver != SAVE_VERSION:
-		push_warning("Save version mismatch. Found %d expected %d" % [ver, SAVE_VERSION])
+	if ver != Constants.SAVE_VERSION:
+		push_warning("Save version mismatch. Found %d expected %d" % [ver, Constants.SAVE_VERSION])
 	last_save_unix = int(dictonary.get("last_save_unix", 0))
 	is_dirty = false
 	money = int(dictonary.get("money", 500))

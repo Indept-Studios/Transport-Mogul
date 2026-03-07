@@ -3,10 +3,9 @@ extends Panel
 
 signal clicked(vehicle: Vehicle)
 
-var vehicle
-
 @onready var status_label: Label = %StatusLabel
 
+var vehicle
 
 func setup(v):
 	vehicle = v
@@ -26,8 +25,8 @@ func update_view():
 		return
 		
 	if vehicle.is_available:
-		status_label.text = "Verfügbar"
+		status_label.text = "aivailable"
 		modulate = Color.WHITE
 	else:
-		status_label.text = "Unterwegs: %s" % Constants.format_duration(vehicle.remaining_time)
+		status_label.text = "on tour: %s" % Constants.format_duration(vehicle.remaining_time)
 		modulate = Color(0.4,0.4,0.4)

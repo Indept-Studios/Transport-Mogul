@@ -3,6 +3,11 @@ extends Node
 const DEBUGFLAG = false
 #const DEBUGFLAG = true
 
+#region general
+const SAVE_PATH := "user://savegame.json"
+const SAVE_VERSION := 1
+#endregion
+
 #region Start
 const START_MONEY = 500
 const START_REPUTATION = 0
