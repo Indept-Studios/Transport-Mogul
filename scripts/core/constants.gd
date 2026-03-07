@@ -1,7 +1,7 @@
 extends Node
 
-#const DEBUGFLAG = false
-const DEBUGFLAG = true
+const DEBUGFLAG = false
+#const DEBUGFLAG = true
 
 #region Start
 const START_MONEY = 500

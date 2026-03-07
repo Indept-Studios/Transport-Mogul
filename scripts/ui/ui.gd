@@ -2,8 +2,9 @@ extends CanvasLayer
 
 @onready var popup_layer: Control = $PopupLayer
 @onready var overlay: ColorRect = $PopupLayer/Overlay
-@onready var money_label = $TopBar/MoneyLabel
-@onready var reputation_label = $TopBar/ReputationLabel
+@onready var money_label = $TopBar/CompanyInfoBox/MoneyLabel
+@onready var reputation_bar = $TopBar/CompanyInfoBox/ProgressBar
+@onready var reputation_label = $TopBar/CompanyInfoBox/ProgressBar/Reputation
 @onready var holder = $BottomContainer/VehicleArea/VehicleHolder
 @onready var contract_popup: PanelContainer = $PopupLayer/ContractPopup
 @onready var contract_buttons := [
@@ -65,7 +66,9 @@ func _apply_bottom_height() -> void:
 
 func update_resources():
 	money_label.text = "Geld: %d" % Gamestate.money
+	reputation_bar.value = Gamestate.reputation
 	reputation_label.text = "Ruf: %d" % Gamestate.reputation
+	
 
 func rebuild_vehicle_cards():
 	for child in holder.get_children():
