@@ -4,10 +4,10 @@ extends CanvasLayer
 
 @onready var money_label: Label = $TopBar/CompanyInfoBox/MoneyLabel
 @onready var reputation_label: Label = $TopBar/CompanyInfoBox/ProgressBar/Reputation
+@onready var reputation_bar: = $TopBar/CompanyInfoBox/ProgressBar
 @onready var holder: HBoxContainer = $BottomContainer/VehicleArea/VehicleHolder
 @onready var bottom_container: Control = $BottomContainer
 @onready var status_label: Label = $BottomContainer/StatusArea/StatusBar/StatusLabel
-
 @onready var game_manager: Node = $"../GameManager"
 @onready var contract_popup: Control = $PopupLayer
 
@@ -33,6 +33,7 @@ func _process(_delta: float) -> void:
 func update_resources() -> void:
 	money_label.text = "Money: %d" % Gamestate.money
 	reputation_label.text = "Reputation: %d" % Gamestate.reputation
+	reputation_bar.value = Gamestate.reputation
 
 func rebuild_vehicle_cards() -> void:
 	for child in holder.get_children():
