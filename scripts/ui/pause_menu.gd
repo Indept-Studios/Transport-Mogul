@@ -10,12 +10,12 @@ extends CanvasLayer
 @onready var quit_to_menu_button: Button = $PopupLayer/PanelContainer/MarginContainer/VBoxContainer/QuitToMenuButton
 @onready var quit_game_button: Button = $PopupLayer/PanelContainer/MarginContainer/VBoxContainer/QuitGameButton
 @onready var quit_confirm: ConfirmationDialog = $QuitConfirm
-@onready var game_manager: Node = $"../GameManager"
-@onready var game_ui: CanvasLayer = $"../UI"
 @onready var main_menu: CanvasLayer = $"../../MainMenu"
 @onready var save_flash: ColorRect = $SaveFlash
 
 var _pending_quit_mode: String = ""
+var game_manager: Node
+var game_ui: CanvasLayer
 
 func _ready():
 	popup_layer.visible = false
@@ -25,7 +25,6 @@ func _ready():
 	load_button.pressed.connect(_on_load_pressed)
 	quit_to_menu_button.pressed.connect(_on_quit_to_menu_pressed)
 	quit_game_button.pressed.connect(_on_quit_game_pressed)
-	quit_confirm.confirmed.connect(_on_quit_confirmed)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):

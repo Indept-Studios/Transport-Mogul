@@ -8,9 +8,10 @@ extends CanvasLayer
 @onready var holder: HBoxContainer = $BottomContainer/VehicleArea/VehicleHolder
 @onready var bottom_container: Control = $BottomContainer
 @onready var status_label: Label = $BottomContainer/StatusArea/StatusBar/StatusLabel
-@onready var game_manager: Node = $"../GameManager"
 @onready var contract_popup: Control = $PopupLayer
 @onready var buy_button: Button = $"BuyButton(DEBUG)"
+
+var game_manager: Node
 
 func _ready() -> void:
 	Gamestate.resources_changed.connect(update_resources)
