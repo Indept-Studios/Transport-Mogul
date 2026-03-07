@@ -8,16 +8,19 @@ extends CanvasLayer
 @onready var save_button: Button = $PopupLayer/PanelContainer/MarginContainer/VBoxContainer/SaveButton
 @onready var load_button: Button = $PopupLayer/PanelContainer/MarginContainer/VBoxContainer/LoadButton
 @onready var quit_to_menu_button: Button = $PopupLayer/PanelContainer/MarginContainer/VBoxContainer/QuitToMenuButton
-@onready var quit_game_button: Button = $PopupLayer/PanelContainer/MarginContainer/VBoxContainer/QuitGameButton
-@onready var quit_confirm: ConfirmationDialog = $QuitConfirm
+@onready var quit_confirm = $QuitConfirm
+@onready var quit_game_button = $PopupLayer/PanelContainer/MarginContainer/VBoxContainer/QuitGameButton
 @onready var main_menu: CanvasLayer = $"../../MainMenu"
 @onready var save_flash: ColorRect = $SaveFlash
+
 
 var _pending_quit_mode: String = ""
 var game_manager: Node
 var game_ui: CanvasLayer
+var game: Node = null
 
-func _ready():
+func _ready() -> void:
+	visible = false
 	popup_layer.visible = false
 	overlay.gui_input.connect(_on_overlay_gui_input)
 	resume_button.pressed.connect(_on_resume_pressed)
@@ -27,8 +30,13 @@ func _ready():
 	quit_game_button.pressed.connect(_on_quit_game_pressed)
 
 func _unhandled_input(event: InputEvent) -> void:
+	if game_ui == null or not game_ui.visible:
+		return
 	if event.is_action_pressed("ui_cancel"):
-		toggle_pause_menu()
+		if visible:
+			close()
+		else:
+			open()
 		get_viewport().set_input_as_handled()
 
 func toggle_pause_menu() -> void:
@@ -38,12 +46,13 @@ func toggle_pause_menu() -> void:
 		open()
 
 func open() -> void:
-	save_button.disabled = not Gamestate.is_dirty
+	visible = true
 	popup_layer.visible = true
 	get_tree().paused = true
 
 func close() -> void:
 	popup_layer.visible = false
+	visible = false
 	get_tree().paused = false
 
 func _on_overlay_gui_input(event: InputEvent) -> void:
@@ -97,12 +106,6 @@ func _on_quit_to_menu_pressed() -> void:
 		return
 	_quit_to_menu()
 
-func _on_quit_game_pressed() -> void:
-	if _needs_quit_warning():
-		_prompt_quit("game")
-		return
-	_quit_game()
-
 func _on_quit_confirmed() -> void:
 	Gamestate.save_game()
 	if _pending_quit_mode == "menu":
@@ -118,3 +121,6 @@ func _quit_to_menu() -> void:
 
 func _quit_game() -> void:
 	get_tree().quit()
+
+func _on_quit_game_pressed() -> void:
+	quit_confirm.visible = true

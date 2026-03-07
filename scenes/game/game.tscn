@@ -18,3 +18,4 @@ script = ExtResource("2_5i0tg")
 [node name="UI" parent="." unique_id=1264776123 instance=ExtResource("3_kelw5")]
 
 [node name="PauseMenu" parent="." unique_id=1879502241 instance=ExtResource("6_5i0tg")]
+visible = false
