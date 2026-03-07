@@ -1,0 +1,214 @@
+[gd_scene format=3 uid="uid://3785qbf8qlui"]
+
+[ext_resource type="Script" uid="uid://dp1sg0m7i0ryv" path="res://scripts/ui/ui.gd" id="1_aac20"]
+[ext_resource type="PackedScene" uid="uid://c2rgh1g0l64ud" path="res://scenes/ui/vehicle_card.tscn" id="2_g5kmx"]
+[ext_resource type="PackedScene" uid="uid://d02pueqfka4i3" path="res://scenes/ui/status_entry.tscn" id="3_0dwhk"]
+
+[node name="UI" type="CanvasLayer" unique_id=1264776123]
+script = ExtResource("1_aac20")
+vehicle_card_scene = ExtResource("2_g5kmx")
+status_entry_scene = ExtResource("3_0dwhk")
+
+[node name="BackgroundColor" type="ColorRect" parent="." unique_id=632232159]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.2901961, 0.2627451, 0.25490198, 1)
+
+[node name="Button" type="Button" parent="." unique_id=1649090734]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -92.5
+offset_top = -58.0
+offset_right = 92.5
+offset_bottom = 58.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Kaufen"
+
+[node name="TopBar" type="HBoxContainer" parent="." unique_id=238369644]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 100.0
+grow_horizontal = 2
+
+[node name="CompanyInfoBox" type="Panel" parent="TopBar" unique_id=1354906219]
+custom_minimum_size = Vector2(400, 100)
+layout_mode = 2
+
+[node name="AvatarFrame" type="Panel" parent="TopBar/CompanyInfoBox" unique_id=1236716875]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 9.0
+offset_top = -41.0
+offset_right = 73.0
+offset_bottom = 23.0
+grow_vertical = 2
+
+[node name="TextureRect" type="ColorRect" parent="TopBar/CompanyInfoBox/AvatarFrame" unique_id=1442069127]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.20784314, 1, 1, 1)
+
+[node name="CompanyName" type="Label" parent="TopBar/CompanyInfoBox" unique_id=1468652228]
+layout_mode = 0
+offset_left = 110.0
+offset_top = 7.0
+offset_right = 389.0
+offset_bottom = 37.0
+text = "Big C. Company"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MoneyLabel" type="Label" parent="TopBar/CompanyInfoBox" unique_id=1990866096]
+layout_mode = 0
+offset_left = 105.0
+offset_top = 37.0
+offset_right = 386.0
+offset_bottom = 60.0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="TopBar/CompanyInfoBox" unique_id=610961825]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -95.0
+offset_top = 60.0
+offset_right = 188.0
+offset_bottom = 87.0
+grow_horizontal = 2
+max_value = 10000.0
+value = 2524.0
+show_percentage = false
+
+[node name="Reputation" type="Label" parent="TopBar/CompanyInfoBox/ProgressBar" unique_id=1639276700]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 1
+
+[node name="Spacer" type="Control" parent="TopBar" unique_id=642626864]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_right = NodePath("../ReputationLabel")
+
+[node name="ReputationLabel" type="Label" parent="TopBar" unique_id=575842560]
+layout_mode = 2
+
+[node name="BottomContainer" type="VBoxContainer" parent="." unique_id=393986435]
+custom_minimum_size = Vector2(0, 110)
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -150.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="VehicleArea" type="ScrollContainer" parent="BottomContainer" unique_id=676118673]
+custom_minimum_size = Vector2(200, 150)
+layout_mode = 2
+size_flags_vertical = 8
+vertical_scroll_mode = 0
+
+[node name="VehicleHolder" type="HBoxContainer" parent="BottomContainer/VehicleArea" unique_id=1433593103]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 12
+
+[node name="StatusArea" type="Control" parent="BottomContainer" unique_id=664214407]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="StatusBar" type="PanelContainer" parent="BottomContainer/StatusArea" unique_id=953643566]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="StatusLabel" type="Label" parent="BottomContainer/StatusArea/StatusBar" unique_id=863358492]
+layout_mode = 2
+
+[node name="PopupLayer" type="Control" parent="." unique_id=972895721]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Overlay" type="ColorRect" parent="PopupLayer" unique_id=26741277]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
+[node name="ContractPopup" type="PanelContainer" parent="PopupLayer" unique_id=472905137]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -105.5
+offset_right = 100.0
+offset_bottom = 105.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PopupLayer/ContractPopup" unique_id=2098874112]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PopupLayer/ContractPopup/MarginContainer" unique_id=1603038277]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="TitleLabel" type="Label" parent="PopupLayer/ContractPopup/MarginContainer/VBoxContainer" unique_id=1348472011]
+layout_mode = 2
+text = "Available contracts"
+horizontal_alignment = 1
+
+[node name="ContractButton0" type="Button" parent="PopupLayer/ContractPopup/MarginContainer/VBoxContainer" unique_id=749835423]
+custom_minimum_size = Vector2(150, 40)
+layout_mode = 2
+
+[node name="ContractButton1" type="Button" parent="PopupLayer/ContractPopup/MarginContainer/VBoxContainer" unique_id=35406122]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="ContractButton2" type="Button" parent="PopupLayer/ContractPopup/MarginContainer/VBoxContainer" unique_id=961746895]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
