@@ -1,0 +1,227 @@
+[gd_scene format=3 uid="uid://cvoy6tb7y2olh"]
+
+[ext_resource type="Script" uid="uid://ev67uydlg25a" path="res://scripts/core/game_manager.gd" id="1_lfrn8"]
+[ext_resource type="Script" uid="uid://c1jkutauox0qq" path="res://scripts/core/contract_service.gd" id="2_5i0tg"]
+[ext_resource type="Script" uid="uid://dp1sg0m7i0ryv" path="res://scripts/ui/ui.gd" id="3_bdhmt"]
+[ext_resource type="PackedScene" uid="uid://c2rgh1g0l64ud" path="res://scenes/game/vehicle_card.tscn" id="4_87uf6"]
+[ext_resource type="PackedScene" uid="uid://d02pueqfka4i3" path="res://scenes/ui/status_entry.tscn" id="5_2a8rs"]
+[ext_resource type="PackedScene" uid="uid://lmv6ensfbcuy" path="res://scenes/main/pause_menu.tscn" id="6_5i0tg"]
+
+[node name="Game" type="Node2D" unique_id=1350833533]
+
+[node name="GameManager" type="Node" parent="." unique_id=1474866821]
+script = ExtResource("1_lfrn8")
+
+[node name="Contract_Service" type="Node" parent="GameManager" unique_id=603034895]
+script = ExtResource("2_5i0tg")
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=745169835]
+script = ExtResource("3_bdhmt")
+vehicle_card_scene = ExtResource("4_87uf6")
+status_entry_scene = ExtResource("5_2a8rs")
+
+[node name="BackgroundColor" type="ColorRect" parent="UI" unique_id=1944889164]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.2901961, 0.2627451, 0.25490198, 1)
+
+[node name="Button" type="Button" parent="UI" unique_id=1889299615]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -92.5
+offset_top = -58.0
+offset_right = 92.5
+offset_bottom = 58.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Kaufen"
+
+[node name="TopBar" type="HBoxContainer" parent="UI" unique_id=732433824]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 100.0
+grow_horizontal = 2
+
+[node name="CompanyInfoBox" type="Panel" parent="UI/TopBar" unique_id=144021670]
+custom_minimum_size = Vector2(400, 100)
+layout_mode = 2
+
+[node name="AvatarFrame" type="Panel" parent="UI/TopBar/CompanyInfoBox" unique_id=279311673]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 9.0
+offset_top = -41.0
+offset_right = 73.0
+offset_bottom = 23.0
+grow_vertical = 2
+
+[node name="TextureRect" type="ColorRect" parent="UI/TopBar/CompanyInfoBox/AvatarFrame" unique_id=367589660]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.20784314, 1, 1, 1)
+
+[node name="CompanyName" type="Label" parent="UI/TopBar/CompanyInfoBox" unique_id=1254780198]
+layout_mode = 0
+offset_left = 110.0
+offset_top = 7.0
+offset_right = 389.0
+offset_bottom = 37.0
+text = "Big C. Company"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MoneyLabel" type="Label" parent="UI/TopBar/CompanyInfoBox" unique_id=1174484943]
+layout_mode = 0
+offset_left = 105.0
+offset_top = 37.0
+offset_right = 386.0
+offset_bottom = 60.0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="UI/TopBar/CompanyInfoBox" unique_id=260097296]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -95.0
+offset_top = 60.0
+offset_right = 188.0
+offset_bottom = 87.0
+grow_horizontal = 2
+max_value = 10000.0
+value = 2524.0
+show_percentage = false
+
+[node name="Reputation" type="Label" parent="UI/TopBar/CompanyInfoBox/ProgressBar" unique_id=202670452]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 1
+
+[node name="Spacer" type="Control" parent="UI/TopBar" unique_id=526740917]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_right = NodePath("../ReputationLabel")
+
+[node name="ReputationLabel" type="Label" parent="UI/TopBar" unique_id=1881352340]
+layout_mode = 2
+
+[node name="BottomContainer" type="VBoxContainer" parent="UI" unique_id=884466884]
+custom_minimum_size = Vector2(0, 110)
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -150.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="VehicleArea" type="ScrollContainer" parent="UI/BottomContainer" unique_id=1263091705]
+custom_minimum_size = Vector2(200, 150)
+layout_mode = 2
+size_flags_vertical = 8
+vertical_scroll_mode = 0
+
+[node name="VehicleHolder" type="HBoxContainer" parent="UI/BottomContainer/VehicleArea" unique_id=1577409200]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 12
+
+[node name="StatusArea" type="Control" parent="UI/BottomContainer" unique_id=1268601468]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="StatusBar" type="PanelContainer" parent="UI/BottomContainer/StatusArea" unique_id=951222790]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="StatusLabel" type="Label" parent="UI/BottomContainer/StatusArea/StatusBar" unique_id=1132998926]
+layout_mode = 2
+
+[node name="PopupLayer" type="Control" parent="UI" unique_id=1129956738]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Overlay" type="ColorRect" parent="UI/PopupLayer" unique_id=1179426397]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
+[node name="ContractPopup" type="PanelContainer" parent="UI/PopupLayer" unique_id=1517297915]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -105.5
+offset_right = 100.0
+offset_bottom = 105.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/PopupLayer/ContractPopup" unique_id=304320477]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/PopupLayer/ContractPopup/MarginContainer" unique_id=1603626567]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="TitleLabel" type="Label" parent="UI/PopupLayer/ContractPopup/MarginContainer/VBoxContainer" unique_id=1931648734]
+layout_mode = 2
+text = "Available contracts"
+horizontal_alignment = 1
+
+[node name="ContractButton0" type="Button" parent="UI/PopupLayer/ContractPopup/MarginContainer/VBoxContainer" unique_id=911105852]
+custom_minimum_size = Vector2(150, 40)
+layout_mode = 2
+
+[node name="ContractButton1" type="Button" parent="UI/PopupLayer/ContractPopup/MarginContainer/VBoxContainer" unique_id=2025888302]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="ContractButton2" type="Button" parent="UI/PopupLayer/ContractPopup/MarginContainer/VBoxContainer" unique_id=1832601792]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="PauseMenu" parent="." unique_id=1879502241 instance=ExtResource("6_5i0tg")]

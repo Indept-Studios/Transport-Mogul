@@ -1,0 +1,99 @@
+[gd_scene format=3 uid="uid://lmv6ensfbcuy"]
+
+[ext_resource type="Script" uid="uid://d3ic5y7qga7vu" path="res://scripts/ui/pause_menu.gd" id="1_qo3ou"]
+
+[node name="PauseMenu" type="CanvasLayer" unique_id=1879502241]
+script = ExtResource("1_qo3ou")
+
+[node name="SaveFlash" type="ColorRect" parent="." unique_id=1667927231]
+process_mode = 2
+z_index = 100
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 1, 0.25490198, 0.003921569)
+
+[node name="PopupLayer" type="Control" parent="." unique_id=1011919756]
+process_mode = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Overlay" type="ColorRect" parent="PopupLayer" unique_id=281856584]
+process_mode = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.2901961, 0.2627451, 0.25490198, 1)
+
+[node name="PanelContainer" type="PanelContainer" parent="PopupLayer" unique_id=30872891]
+process_mode = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PopupLayer/PanelContainer" unique_id=1695392947]
+process_mode = 2
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PopupLayer/PanelContainer/MarginContainer" unique_id=2101489547]
+process_mode = 2
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="TitelLabel" type="Label" parent="PopupLayer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1547476150]
+process_mode = 2
+layout_mode = 2
+text = " Game Paused "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ResumeButton" type="Button" parent="PopupLayer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1012313148]
+process_mode = 2
+layout_mode = 2
+text = "Resume"
+
+[node name="SaveButton" type="Button" parent="PopupLayer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1278188156]
+process_mode = 2
+layout_mode = 2
+text = "Save Game"
+
+[node name="LoadButton" type="Button" parent="PopupLayer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1956604113]
+process_mode = 2
+layout_mode = 2
+text = "Load Game"
+
+[node name="QuitToMenuButton" type="Button" parent="PopupLayer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1947715933]
+process_mode = 2
+layout_mode = 2
+text = "Quit to Main Menu"
+
+[node name="QuitGameButton" type="Button" parent="PopupLayer/PanelContainer/MarginContainer/VBoxContainer" unique_id=388370407]
+process_mode = 2
+layout_mode = 2
+text = "Quit to Desktop"
+
+[node name="QuitConfirm" type="ConfirmationDialog" parent="." unique_id=699873698]
+process_mode = 2

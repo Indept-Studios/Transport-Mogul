@@ -1,5 +1,8 @@
 extends CanvasLayer
 
+@export var vehicle_card_scene: PackedScene
+@export var status_entry_scene: PackedScene
+
 @onready var popup_layer: Control = $PopupLayer
 @onready var overlay: ColorRect = $PopupLayer/Overlay
 @onready var money_label = $TopBar/CompanyInfoBox/MoneyLabel
@@ -14,11 +17,8 @@ extends CanvasLayer
 	]
 @onready var game_manager: Node = $"../GameManager"
 @onready var bottom_container: Control = $BottomContainer
-
-@export var vehicle_card_scene: PackedScene
-@export var status_entry_scene: PackedScene
-
 @onready var status_label: Label = $BottomContainer/StatusArea/StatusBar/StatusLabel
+
 var current_vehicle: Vehicle = null
 
 func _ready():

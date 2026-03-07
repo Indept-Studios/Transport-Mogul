@@ -3,8 +3,8 @@ extends CanvasLayer
 @onready var continue_button: Button = $PanelContainer/VBoxContainer/ContinueButton
 @onready var new_game_button: Button = $PanelContainer/VBoxContainer/NewGameButton
 @onready var quit_button: Button = $PanelContainer/VBoxContainer/QuitButton
-@onready var game_ui: CanvasLayer = $"../UI"
-@onready var game_manager: Node = $"../GameManager"
+@onready var game_ui: CanvasLayer = $"../Game/UI"
+@onready var game_manager: Node = $"../Game/GameManager"
 
 func _ready():
 	continue_button.pressed.connect(_on_continue_pressed)

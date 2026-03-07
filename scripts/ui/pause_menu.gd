@@ -12,7 +12,7 @@ extends CanvasLayer
 @onready var quit_confirm: ConfirmationDialog = $QuitConfirm
 @onready var game_manager: Node = $"../GameManager"
 @onready var game_ui: CanvasLayer = $"../UI"
-@onready var main_menu: CanvasLayer = $"../MainMenu"
+@onready var main_menu: CanvasLayer = $"../../MainMenu"
 @onready var save_flash: ColorRect = $SaveFlash
 
 var _pending_quit_mode: String = ""

@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://dgtixi54nyyd6"]
+
+[ext_resource type="Script" uid="uid://dlin4l4bvuis" path="res://scripts/ui/main_menu.gd" id="1_sd5it"]
+
+[node name="MainMenu" type="CanvasLayer" unique_id=847548221]
+script = ExtResource("1_sd5it")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1906654670]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Overlay" type="ColorRect" parent="PanelContainer" unique_id=1026945742]
+process_mode = 2
+layout_mode = 2
+color = Color(0.2901961, 0.2627451, 0.25490198, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=29629850]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer" unique_id=1095224661]
+layout_mode = 2
+text = "
+Transport Mogul
+"
+horizontal_alignment = 1
+
+[node name="ContinueButton" type="Button" parent="PanelContainer/VBoxContainer" unique_id=723590108]
+layout_mode = 2
+text = "Continue"
+
+[node name="NewGameButton" type="Button" parent="PanelContainer/VBoxContainer" unique_id=1602944212]
+layout_mode = 2
+text = "New Game"
+
+[node name="QuitButton" type="Button" parent="PanelContainer/VBoxContainer" unique_id=731996776]
+layout_mode = 2
+text = "Quit"
