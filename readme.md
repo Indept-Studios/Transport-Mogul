@@ -31,6 +31,7 @@ Mit ausreichend Kapital können zusätzliche Fahrzeuge gekauft werden, wodurch m
 - Skalierbare Auftragsgenerierung
 - Erweiterbare technische Architektur
 - Minimalistische, aber informative UI
+- Sichtbares Zeitfeedback für den Spieler
 
 ## 2.2 Nicht-Ziele (bewusst ausgeschlossen)
 
@@ -173,6 +174,14 @@ Zeitformatierung für bessere Lesbarkeit:
 1h20m
 ```
 
+Zusätzlich zeigt das UI eine **Realtime-Systemuhr**:
+
+```text
+HH:MM:SS
+```
+
+Diese Uhr dient als visuelles Feedback dafür, dass Zeit im Spiel vergeht.
+
 ---
 
 # 4.6 Geld-System
@@ -251,12 +260,28 @@ Alle Einträge werden im Speicher gehalten und beim Speichern dem Savegame beige
 
 ---
 
-# 5.1 Globale Anzeige
+# 5.1 Top Bar
 
-Die obere Leiste zeigt:
+Die obere Leiste zeigt zwei Informationsblöcke.
+
+### Company Information
 
 - Geld
 - Ruf
+
+### Game Status
+
+- aktuelle Systemzeit (HH:MM:SS)
+- Anzahl aktiver Fahrzeuge
+- Anzahl inaktiver Fahrzeuge
+
+Beispiel:
+
+```text
+14:37:12
+Active vehicles: 2
+Idle vehicles: 1
+```
 
 ---
 
@@ -326,6 +351,7 @@ Grundprinzipien:
 - Aufträge sind eigene Datenstrukturen
 - Auftragsgenerierung über Service-Klasse
 - Ereignisbasierte Updates über Signale
+- Szenenstruktur für Menüs und UI
 
 ---
 
@@ -359,7 +385,7 @@ Version 0.1 gilt als abgeschlossen, wenn:
 - Save/Load funktioniert
 - das Spiel mindestens **15 Minuten stabil spielbar ist**
 
-Version 0.1 soll bis 15.03.2026 fertig sein.
+Version 0.1 soll bis **15.03.2026** fertig sein.
 
 ---
 
@@ -382,6 +408,8 @@ Schwerpunkte:
 - Status-Log-System
 - Save/Load-System
 - Grundlegendes Balancing
+- Realtime-Uhr im UI
+- Fahrzeugstatusanzeige
 
 Diese Version stellt die **erste vollständig spielbare Grundlage** dar.
 
@@ -418,6 +446,8 @@ Geplante Erweiterungen:
 - Weitere UI-Verbesserungen
 
 Diese Version soll den Übergang vom **Prototyp zu einem vollwertigen Managementspiel** vorbereiten.
+
+---
 
 # 11. Erweiterungspotenzial (nicht Teil von Version 0.1)
 
