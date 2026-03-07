@@ -10,6 +10,9 @@ extends CanvasLayer
 @onready var status_label: Label = $BottomContainer/StatusArea/StatusBar/StatusLabel
 @onready var contract_popup: Control = $PopupLayer
 @onready var buy_button: Button = $"BuyButton(DEBUG)"
+@onready var time_label: Label = $TopBar/GameInfoBox/TimeLabel
+@onready var active_label: Label = $TopBar/GameInfoBox/ActiveVehiclesLabel
+@onready var idle_label: Label = $TopBar/GameInfoBox/IdleVehiclesLabel
 
 var game_manager: Node
 
@@ -26,8 +29,14 @@ func _ready() -> void:
 
 	_apply_bottom_height()
 	get_viewport().size_changed.connect(_apply_bottom_height)
+	var timer := Timer.new()
+	timer.wait_time = 1.0
+	timer.timeout.connect(update_clock)
+	timer.autostart = true
+	add_child(timer)
 
 func _process(_delta: float) -> void:
+	update_vehicle_status()
 	for child in holder.get_children():
 		if child is VehicleCard:
 			child.update_view()
@@ -42,7 +51,22 @@ func _on_buy_pressed() -> void:
 		game_manager.add_vehicle(game_manager.create_vehicle())
 	else:
 		game_manager.buy_vehicle()
-	
+
+func update_clock() -> void:
+	var t := Time.get_datetime_dict_from_system()
+	time_label.text = "%02d:%02d:%02d" % [t.hour, t.minute, t.second]
+
+func update_vehicle_status() -> void:
+	var active := 0
+	var idle := 0
+
+	for v in Gamestate.vehicles:
+		if v.is_available:
+			idle += 1
+		else:
+			active += 1
+	active_label.text = "Active vehicles: %d" % active
+	idle_label.text = "Idle vehicles: %d" % idle
 
 func rebuild_vehicle_cards() -> void:
 	for child in holder.get_children():
