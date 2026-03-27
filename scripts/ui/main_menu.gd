@@ -6,7 +6,6 @@ extends CanvasLayer
 
 var game: Node = null
 var game_ui: CanvasLayer = null
-var game_manager: Node = null
 
 func _ready():
 	continue_button.pressed.connect(_on_continue_pressed)
@@ -15,7 +14,7 @@ func _ready():
 	_refresh()
 
 func _refresh() -> void:
-	continue_button.disabled = not Gamestate.has_save()
+	continue_button.disabled = not GameManager.has_save()
 	visible = true
 
 func show_menu() -> void:
@@ -29,16 +28,16 @@ func _start_game() -> void:
 	visible = false
 
 func _on_continue_pressed() -> void:
-	if game_manager == null:
+	if GameManager == null:
 		return
 	if Gamestate.load_game():
-		game_manager.start_from_loaded_game()
+		GameManager.start_from_loaded_game()
 		_start_game()
 
 func _on_new_game_pressed() -> void:
-	if game_manager == null:
+	if GameManager == null:
 		return
-	game_manager.start_new_game()
+	GameManager.start_new_game()
 	_start_game()
 
 func _on_quit_pressed() -> void:

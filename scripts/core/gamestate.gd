@@ -42,40 +42,9 @@ func get_reputation_tier() -> int:
 		base_tier = 5
 	else:
 		base_tier = 6
-
 	emit_signal("tier_changed")
 	return base_tier
 
-func to_dict() -> Dictionary:
-	var vehicles_dict := {}
-	for v: Vehicle in vehicles:
-		vehicles_dict[str(v.id)] = v.to_dict()
-	return {
-		"save_version": Constants.SAVE_VERSION,
-		"money": money,
-		"reputation": reputation,
-		"last_save_unix": last_save_unix,
-		"vehicles": vehicles_dict,
-		"tier_level": tier,
-		"status_log": StatusLog.to_message_array(),
-	}
-
-func save_game() -> bool:
-	last_save_unix = int(Time.get_unix_time_from_system())
-	var data := to_dict()
-	var json := JSON.stringify(data, "\t") 
-	var file := FileAccess.open(Constants.SAVE_PATH, FileAccess.WRITE)
-	if file == null:
-		push_error("Could not open save file for writing: " + Constants.SAVE_PATH)
-		return false
-	file.store_string(json)
-	file.close()
-	is_dirty = false
-	StatusLog.add("Game successfully saved", "success")
-	return true
-
-func has_save() -> bool:
-	return FileAccess.file_exists(Constants.SAVE_PATH)
 	
 func reset_game() -> void:
 	money = Constants.START_MONEY

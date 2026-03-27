@@ -1,11 +1,9 @@
 [gd_scene format=3 uid="uid://dgtixi54nyyd6"]
 
 [ext_resource type="Script" uid="uid://dlin4l4bvuis" path="res://scripts/ui/main_menu.gd" id="1_sd5it"]
-[ext_resource type="PackedScene" uid="uid://3785qbf8qlui" path="res://scenes/ui/ui.tscn" id="2_ovrgc"]
 
 [node name="MainMenu" type="CanvasLayer" unique_id=847548221]
 script = ExtResource("1_sd5it")
-game_ui = ExtResource("2_ovrgc")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1906654670]
 anchors_preset = 15

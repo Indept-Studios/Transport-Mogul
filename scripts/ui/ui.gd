@@ -15,8 +15,6 @@ extends CanvasLayer
 @onready var active_label: Label = %ActiveVehiclesLabel
 @onready var idle_label: Label = %IdleVehiclesLabel
 
-var game_manager: Node
-
 func _ready() -> void:
 	Gamestate.resources_changed.connect(update_resources)
 	Gamestate.vehicles_changed.connect(rebuild_vehicle_cards)
@@ -50,9 +48,9 @@ func update_resources() -> void:
 
 func _on_buy_pressed() -> void:
 	if Constants.DEBUGFLAG:
-		game_manager.add_vehicle(game_manager.create_vehicle())
+		GameManager.add_vehicle(GameManager.create_vehicle())
 	else:
-		game_manager.buy_vehicle()
+		GameManager.buy_vehicle()
 
 func update_clock() -> void:
 	var t := Time.get_datetime_dict_from_system()
@@ -85,7 +83,7 @@ func _on_vehicle_card_clicked(vehicle: Vehicle) -> void:
 	contract_popup.show_for_vehicle(vehicle)
 
 func _on_contract_selected(vehicle: Vehicle, contract: Contract) -> void:
-	game_manager.assign_contract(vehicle, contract)
+	GameManager.assign_contract(vehicle, contract)
 
 func _on_status_changed() -> void:
 	var latest: Array = StatusLog.get_latest(1)

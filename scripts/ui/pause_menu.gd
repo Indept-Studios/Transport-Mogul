@@ -15,7 +15,6 @@ extends CanvasLayer
 
 
 var _pending_quit_mode: String = ""
-var game_manager: Node
 var game_ui: CanvasLayer
 var game: Node = null
 
@@ -82,7 +81,7 @@ func _play_save_flash() -> void:
 
 func _on_load_pressed() -> void:
 	if Gamestate.load_game():
-		game_manager.start_from_loaded_game()
+		GameManager.start_from_loaded_game()
 	close()
 
 func _needs_quit_warning() -> bool:

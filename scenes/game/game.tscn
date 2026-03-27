@@ -1,19 +1,11 @@
 [gd_scene format=3 uid="uid://cvoy6tb7y2olh"]
 
 [ext_resource type="Script" uid="uid://u6u7ib58mgq5" path="res://scripts/core/game.gd" id="1_5i0tg"]
-[ext_resource type="Script" uid="uid://ev67uydlg25a" path="res://scripts/core/game_manager.gd" id="1_lfrn8"]
-[ext_resource type="Script" uid="uid://c1jkutauox0qq" path="res://scripts/core/contract_service.gd" id="2_5i0tg"]
 [ext_resource type="PackedScene" uid="uid://3785qbf8qlui" path="res://scenes/ui/ui.tscn" id="3_kelw5"]
 [ext_resource type="PackedScene" uid="uid://lmv6ensfbcuy" path="res://scenes/menus/pause_menu.tscn" id="6_5i0tg"]
 
 [node name="Game" type="Node2D" unique_id=1350833533]
 script = ExtResource("1_5i0tg")
-
-[node name="GameManager" type="Node" parent="." unique_id=1474866821]
-script = ExtResource("1_lfrn8")
-
-[node name="Contract_Service" type="Node" parent="GameManager" unique_id=603034895]
-script = ExtResource("2_5i0tg")
 
 [node name="UI" parent="." unique_id=1264776123 instance=ExtResource("3_kelw5")]
 
