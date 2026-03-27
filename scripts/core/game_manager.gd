@@ -88,7 +88,7 @@ func start_from_loaded_game() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("save_game"):
-		Gamestate.save_game()
+		save_game()
 		get_viewport().set_input_as_handled()
 	if event.is_action_pressed("load_game"):
 		if Gamestate.load_game():

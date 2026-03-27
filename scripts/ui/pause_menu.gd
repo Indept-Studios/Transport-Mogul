@@ -62,7 +62,7 @@ func _on_resume_pressed() -> void:
 	close()
 
 func _on_save_pressed() -> void:
-	if Gamestate.save_game():
+	if GameManager.save_game():
 		await _play_save_flash()
 	close()
 
@@ -106,7 +106,7 @@ func _on_quit_to_menu_pressed() -> void:
 	_quit_to_menu()
 
 func _on_quit_confirmed() -> void:
-	Gamestate.save_game()
+	GameManager.save_game()
 	if _pending_quit_mode == "menu":
 		_quit_to_menu()
 	elif _pending_quit_mode == "game":

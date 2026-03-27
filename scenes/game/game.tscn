@@ -1,20 +1,11 @@
 [gd_scene format=3 uid="uid://cvoy6tb7y2olh"]
 
+[ext_resource type="Script" uid="uid://dx1nmnisxhyht" path="res://scripts/core/game.gd" id="1_0sr1o"]
 [ext_resource type="PackedScene" uid="uid://3785qbf8qlui" path="res://scenes/ui/ui.tscn" id="3_kelw5"]
 [ext_resource type="PackedScene" uid="uid://lmv6ensfbcuy" path="res://scenes/menus/pause_menu.tscn" id="6_5i0tg"]
 
-[sub_resource type="GDScript" id="GDScript_7h61r"]
-script/source = "extends Node2D
-
-@onready var ui = $UI
-@onready var pause_menu = $PauseMenu
-
-func _ready() -> void:
-	pause_menu.game_ui = ui
-"
-
 [node name="Game" type="Node2D" unique_id=1350833533]
-script = SubResource("GDScript_7h61r")
+script = ExtResource("1_0sr1o")
 
 [node name="UI" parent="." unique_id=1264776123 instance=ExtResource("3_kelw5")]
 
