@@ -25,7 +25,7 @@ func update_view():
 		return
 		
 	if vehicle.is_available:
-		status_label.text = "aivailable"
+		status_label.text = "available"
 		modulate = Color.WHITE
 	else:
 		status_label.text = "on tour: %s" % Constants.format_duration(vehicle.remaining_time)

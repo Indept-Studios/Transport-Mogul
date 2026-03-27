@@ -2,6 +2,7 @@ extends Node
 
 signal vehicles_changed
 signal resources_changed
+signal tier_changed
 
 var contrac_service: Contract_Service = null
 var money: int = Constants.START_MONEY
@@ -27,18 +28,23 @@ func add_reputation(amount: int):
 	emit_signal("resources_changed")
 
 func get_reputation_tier() -> int:
+	var base_tier: int
+	
 	if Gamestate.reputation < 10:
-		return 1
+		base_tier = 1
 	elif Gamestate.reputation < 200:
-		return 2
+		base_tier = 2
 	elif Gamestate.reputation < 500:
-		return 3
+		base_tier = 3
 	elif Gamestate.reputation < 2000:
-		return 4
+		base_tier = 4
 	elif Gamestate.reputation < 5000:
-		return 5
+		base_tier = 5
 	else:
-		return 6
+		base_tier = 6
+
+	emit_signal("tier_changed")
+	return base_tier
 
 func to_dict() -> Dictionary:
 	var vehicles_dict := {}

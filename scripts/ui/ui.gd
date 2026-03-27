@@ -2,17 +2,18 @@ extends CanvasLayer
 
 @export var vehicle_card_scene: PackedScene
 
-@onready var money_label: Label = $TopBar/CompanyInfoBox/MoneyLabel
-@onready var reputation_label: Label = $TopBar/CompanyInfoBox/ProgressBar/Reputation
-@onready var reputation_bar: = $TopBar/CompanyInfoBox/ProgressBar
-@onready var holder: HBoxContainer = $BottomContainer/VehicleArea/VehicleHolder
+@onready var money_label = %MoneyLabel
+@onready var reputation_label: Label = %ReputationLabel
+@onready var reputation_bar: = %ProgressBar
+@onready var company_level_panel = %CompanyLevelPanel 
+@onready var holder: HBoxContainer = %VehicleHolder
 @onready var bottom_container: Control = $BottomContainer
-@onready var status_label: Label = $BottomContainer/StatusArea/StatusBar/StatusLabel
+@onready var status_label: Label = %StatusLabel
 @onready var contract_popup: Control = $PopupLayer
 @onready var buy_button: Button = $"BuyButton(DEBUG)"
-@onready var time_label: Label = $TopBar/GameInfoBox/TimeLabel
-@onready var active_label: Label = $TopBar/GameInfoBox/ActiveVehiclesLabel
-@onready var idle_label: Label = $TopBar/GameInfoBox/IdleVehiclesLabel
+@onready var time_label: Label = %TimeLabel
+@onready var active_label: Label = %ActiveVehiclesLabel
+@onready var idle_label: Label = %IdleVehiclesLabel
 
 var game_manager: Node
 
@@ -27,7 +28,7 @@ func _ready() -> void:
 	rebuild_vehicle_cards()
 	_on_status_changed()
 
-	_apply_bottom_height()
+	#_apply_bottom_height()
 	get_viewport().size_changed.connect(_apply_bottom_height)
 	var timer := Timer.new()
 	timer.wait_time = 1.0
@@ -42,9 +43,10 @@ func _process(_delta: float) -> void:
 			child.update_view()
 
 func update_resources() -> void:
-	money_label.text = "Money: %d" % Gamestate.money
-	reputation_label.text = "Reputation: %d" % Gamestate.reputation
+	money_label.text = "$%d" % Gamestate.money
+	reputation_label.text = "Rep.: %d" % Gamestate.reputation
 	reputation_bar.value = Gamestate.reputation
+	company_level_panel.text = str("lvl.: %d" % Gamestate.tier)
 
 func _on_buy_pressed() -> void:
 	if Constants.DEBUGFLAG:
