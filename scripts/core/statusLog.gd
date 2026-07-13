@@ -2,7 +2,7 @@ extends Node
 
 signal changed
 
-@export var max_entries: int = 200
+@export var max_entries: int = 20000
 
 var _next_id: int = 1
 var entries: Array[Dictionary] = []

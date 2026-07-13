@@ -462,3 +462,35 @@ Geplante Systeme für spätere Versionen:
 - Mitarbeiter
 - Finanzsysteme
 - Audio und Musik
+
+
+Eventuelle Umwandlung
+
+1. Game State System
+Verwaltet den globalen Spielzustand (z. B. aktiv, pausiert) und steuert, ob die Simulation läuft oder angehalten ist.
+2. Time System
+Stellt die zentrale Spielzeit bereit und sorgt dafür, dass Aufträge korrekt über Zeit ablaufen und abgeschlossen werden.
+3. Vehicle System
+Verwaltet alle Fahrzeuge, deren Verfügbarkeit, laufende Aufträge und individuelle Zustände.
+4. Contract System
+Definiert Aufträge mit Dauer, Belohnung und Rufgewinn und stellt deren Datenstruktur bereit.
+5. Contract Generation System
+Erzeugt dynamisch neue Aufträge basierend auf dem aktuellen Ruf-Tier und sorgt für eine skalierende Auswahl pro Fahrzeug.
+6. Reputation System
+Verwaltet den Ruf des Spielers und bestimmt, welche Auftrags-Tiers und Inhalte verfügbar sind.
+7. Money System
+Verwaltet das Geld des Spielers, inklusive Einnahmen durch Aufträge und Ausgaben für neue Fahrzeuge.
+8. Progress System
+Aktualisiert laufende Aufträge über die Zeit und erkennt automatisch, wann ein Auftrag abgeschlossen ist.
+9. Dispatch System
+Ermöglicht die Zuweisung eines Fahrzeugs zu einem Auftrag und startet den jeweiligen Arbeitsprozess.
+10. Vehicle Expansion System
+Erlaubt den Kauf neuer Fahrzeuge und erweitert damit die parallel bearbeitbaren Aufträge.
+11. Status Log System
+Erfasst wichtige Spielereignisse (z. B. Auftragsabschluss) und stellt diese für Anzeige und Speicherung bereit.
+12. UI System
+Zeigt alle relevanten Informationen wie Geld, Ruf, Fahrzeuge und Aufträge an und ermöglicht die Interaktion des Spielers.
+13. Save/Load System
+Speichert und lädt den Spielzustand (z. B. Geld, Fahrzeuge, Aufträge) persistent als JSON.
+14. Formatting / Display System
+Formatiert Zeitangaben und andere Werte für die UI (z. B. 1h20m, HH:MM:SS) zur besseren Lesbarkeit.

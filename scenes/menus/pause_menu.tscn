@@ -34,7 +34,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.2901961, 0.2627451, 0.25490198, 1)
+color = Color(0.07058824, 0.078431375, 0.09019608, 1)
 
 [node name="PanelContainer" type="PanelContainer" parent="PopupLayer" unique_id=30872891]
 process_mode = 2

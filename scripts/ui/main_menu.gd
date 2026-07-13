@@ -1,44 +1,15 @@
-extends CanvasLayer
+extends Control
 
-@onready var continue_button: Button = $PanelContainer/VBoxContainer/ContinueButton
-@onready var new_game_button: Button = $PanelContainer/VBoxContainer/NewGameButton
-@onready var quit_button: Button = $PanelContainer/VBoxContainer/QuitButton
-
-var game: Node = null
-var game_ui: CanvasLayer = null
-
-func _ready():
-	continue_button.pressed.connect(_on_continue_pressed)
-	new_game_button.pressed.connect(_on_new_game_pressed)
-	quit_button.pressed.connect(_on_quit_pressed)
-	_refresh()
-
-func _refresh() -> void:
-	continue_button.disabled = not GameManager.has_save()
-	visible = true
-
-func show_menu() -> void:
-	_refresh()
-
-func _start_game() -> void:
-	if game != null:
-		game.visible = true
-	if game_ui != null:
-		game_ui.visible = true
-	visible = false
-
-func _on_continue_pressed() -> void:
-	if GameManager == null:
-		return
-	if Gamestate.load_game():
-		GameManager.start_from_loaded_game()
-		_start_game()
-
-func _on_new_game_pressed() -> void:
-	if GameManager == null:
-		return
+func _on_new_game_btn_pressed():
+	Transition.play_transistion()
+	await Transition.on_transition_finished
 	GameManager.start_new_game()
-	_start_game()
+	get_tree().change_scene_to_file("uid://cvoy6tb7y2olh")
 
-func _on_quit_pressed() -> void:
+func _on_options_btn_pressed():
+	Transition.play_transistion()
+	await Transition.on_transition_finished
+	get_tree().change_scene_to_packed(null)
+
+func _on_exit_btn_pressed():
 	get_tree().quit()

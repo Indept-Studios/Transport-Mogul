@@ -11,11 +11,12 @@ extends CanvasLayer
 @onready var status_label: Label = %StatusLabel
 @onready var contract_popup: Control = $PopupLayer
 @onready var buy_button: Button = $"BuyButton(DEBUG)"
-@onready var time_label: Label = %TimeLabel
+@onready var time_label: Label = %TimeLabel #
 @onready var active_label: Label = %ActiveVehiclesLabel
 @onready var idle_label: Label = %IdleVehiclesLabel
 
 func _ready() -> void:
+	update_clock()
 	Gamestate.resources_changed.connect(update_resources)
 	Gamestate.vehicles_changed.connect(rebuild_vehicle_cards)
 	StatusLog.changed.connect(_on_status_changed)

@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://die0ny5mhffo7"]
+
+[ext_resource type="Script" uid="uid://cr131svumjwmm" path="res://scripts/ui/debug_text_overlay.gd" id="1_ghvks"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ghvks"]
+font_color = Color(0, 1, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_n6po1"]
+
+[node name="DebugTextOverlay" type="Control" unique_id=596725966]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ghvks")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=913010790]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=2109978005]
+layout_mode = 2
+alignment = 2
+
+[node name="FpsLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1862934667]
+unique_name_in_owner = true
+layout_mode = 2
+label_settings = SubResource("LabelSettings_ghvks")
+
+[node name="VersionInfo" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1886849606]
+unique_name_in_owner = true
+layout_mode = 2
+label_settings = SubResource("LabelSettings_n6po1")
+
+[node name="DebugInfo" type="Label" parent="MarginContainer/VBoxContainer" unique_id=256008006]
+layout_mode = 2
+text = "Transport Mogul
+Developed by Indept-Studios"

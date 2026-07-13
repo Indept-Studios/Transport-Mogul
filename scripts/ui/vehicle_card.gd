@@ -23,7 +23,7 @@ func _gui_input(event):
 func update_view():
 	if vehicle == null:
 		return
-		
+
 	if vehicle.is_available:
 		status_label.text = "available"
 		modulate = Color.WHITE

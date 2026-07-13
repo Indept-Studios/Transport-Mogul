@@ -69,9 +69,10 @@ func add_reputation(amount: int):
 func start_new_game() -> void:
 	StatusLog.clear()
 	Gamestate.reset_game()
+	TimeSystem.reset_time()
 	add_vehicle(create_vehicle())
 	Gamestate.contrac_service.generate_contracts_for(Gamestate.vehicles[0])
-
+	
 func define_level() -> void:
 	company_info = [
 		CompanyLevel.new(0, 0, Vector2(10,30), 1.0, 1.0 ),
@@ -102,7 +103,7 @@ func has_save() -> bool:
 	return FileAccess.file_exists(Constants.SAVE_PATH)
 	
 func save_game() -> bool:
-	Gamestate.last_save_unix = int(Time.get_unix_time_from_system())
+	#Gamestate.last_save_unix = int(Time.get_unix_time_from_system())
 	var data := to_dict()
 	var json := JSON.stringify(data, "\t") 
 	var file := FileAccess.open(Constants.SAVE_PATH, FileAccess.WRITE)

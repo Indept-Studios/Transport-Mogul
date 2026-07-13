@@ -26,14 +26,6 @@ bg_color = Color(0.827451, 0.52156866, 0, 1)
 script = ExtResource("1_aac20")
 vehicle_card_scene = ExtResource("2_g5kmx")
 
-[node name="BackgroundColor" type="ColorRect" parent="." unique_id=632232159]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.2901961, 0.2627451, 0.25490198, 1)
-
 [node name="BuyButton(DEBUG)" type="Button" parent="." unique_id=1649090734]
 anchors_preset = 8
 anchor_left = 0.5
@@ -158,7 +150,7 @@ size_flags_vertical = 8
 [node name="TimeLabel" type="Label" parent="TopBar/GameInfoBox" unique_id=619581787]
 unique_name_in_owner = true
 layout_mode = 2
-text = "12:34:56"
+text = "00:00:00"
 horizontal_alignment = 1
 vertical_alignment = 1
 

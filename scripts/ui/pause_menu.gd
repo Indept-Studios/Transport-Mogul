@@ -10,7 +10,6 @@ extends CanvasLayer
 @onready var quit_to_menu_button: Button = $PopupLayer/PanelContainer/MarginContainer/VBoxContainer/QuitToMenuButton
 @onready var quit_confirm = $QuitConfirm
 @onready var quit_game_button = $PopupLayer/PanelContainer/MarginContainer/VBoxContainer/QuitGameButton
-@onready var main_menu: CanvasLayer = $"../../MainMenu"
 @onready var save_flash: ColorRect = $SaveFlash
 
 
@@ -115,8 +114,6 @@ func _on_quit_confirmed() -> void:
 func _quit_to_menu() -> void:
 	close()
 	game_ui.visible = false
-	main_menu.visible = true
-	main_menu.show_menu()
 
 func _quit_game() -> void:
 	get_tree().quit()

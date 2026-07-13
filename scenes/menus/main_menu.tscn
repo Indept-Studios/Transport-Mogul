@@ -1,23 +1,48 @@
 [gd_scene format=3 uid="uid://dgtixi54nyyd6"]
 
 [ext_resource type="Script" uid="uid://dlin4l4bvuis" path="res://scripts/ui/main_menu.gd" id="1_sd5it"]
+[ext_resource type="PackedScene" uid="uid://die0ny5mhffo7" path="res://scenes/ui/debug_text_overlay.tscn" id="2_ovrgc"]
 
-[node name="MainMenu" type="CanvasLayer" unique_id=847548221]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_715ky"]
+
+[node name="MainMenu" type="Control" unique_id=1309827523]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_sd5it")
 
-[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1906654670]
+[node name="UI" type="CanvasLayer" parent="." unique_id=128029851]
+layer = 110
+
+[node name="UIRoot" type="Control" parent="UI" unique_id=167890527]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Overlay" type="ColorRect" parent="PanelContainer" unique_id=1026945742]
-process_mode = 2
-layout_mode = 2
-color = Color(0.2901961, 0.2627451, 0.25490198, 1)
+[node name="Panel" type="Panel" parent="UI/UIRoot" unique_id=154781334]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_715ky")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=29629850]
+[node name="CenterContainer" type="CenterContainer" parent="UI/UIRoot/Panel" unique_id=1072974225]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/UIRoot/Panel/CenterContainer" unique_id=29629850]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -25,21 +50,69 @@ size_flags_vertical = 4
 theme_override_constants/separation = 4
 alignment = 1
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer" unique_id=1095224661]
+[node name="Label" type="Label" parent="UI/UIRoot/Panel/CenterContainer/VBoxContainer" unique_id=1095224661]
 layout_mode = 2
 text = "
 Transport Mogul
 "
 horizontal_alignment = 1
 
-[node name="ContinueButton" type="Button" parent="PanelContainer/VBoxContainer" unique_id=723590108]
-layout_mode = 2
-text = "Continue"
-
-[node name="NewGameButton" type="Button" parent="PanelContainer/VBoxContainer" unique_id=1602944212]
+[node name="NewGameBtn" type="Button" parent="UI/UIRoot/Panel/CenterContainer/VBoxContainer" unique_id=1602944212]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 40)
 layout_mode = 2
 text = "New Game"
 
-[node name="QuitButton" type="Button" parent="PanelContainer/VBoxContainer" unique_id=731996776]
+[node name="OptionsBtn" type="Button" parent="UI/UIRoot/Panel/CenterContainer/VBoxContainer" unique_id=723590108]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 2
+text = "Continue"
+
+[node name="ExitBtn" type="Button" parent="UI/UIRoot/Panel/CenterContainer/VBoxContainer" unique_id=731996776]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 40)
 layout_mode = 2
 text = "Quit"
+
+[node name="Background_Layer" type="CanvasLayer" parent="." unique_id=662272131]
+layer = -10
+
+[node name="BackgroundRoot" type="Control" parent="Background_Layer" unique_id=1120383037]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="Background_Layer/BackgroundRoot" unique_id=50404964]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.07058824, 0.078431375, 0.09019608, 1)
+
+[node name="DebugLayer" type="CanvasLayer" parent="." unique_id=313232792]
+process_mode = 3
+layer = 128
+
+[node name="DebugRoot" type="Control" parent="DebugLayer" unique_id=1774415895]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+mouse_behavior_recursive = 1
+
+[node name="DebugTextOverlay" parent="DebugLayer/DebugRoot" unique_id=596725966 instance=ExtResource("2_ovrgc")]
+layout_mode = 1
+
+[connection signal="pressed" from="UI/UIRoot/Panel/CenterContainer/VBoxContainer/NewGameBtn" to="." method="_on_new_game_btn_pressed"]
+[connection signal="pressed" from="UI/UIRoot/Panel/CenterContainer/VBoxContainer/OptionsBtn" to="." method="_on_options_btn_pressed"]
+[connection signal="pressed" from="UI/UIRoot/Panel/CenterContainer/VBoxContainer/ExitBtn" to="." method="_on_exit_btn_pressed"]

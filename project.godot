@@ -11,8 +11,9 @@ config_version=5
 [application]
 
 config/name="TransportMogul"
-run/main_scene="uid://bjb8s58i6o2ov"
-config/features=PackedStringArray("4.6", "GL Compatibility")
+config/version="0.1.0"
+run/main_scene="uid://dgtixi54nyyd6"
+config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
@@ -22,13 +23,16 @@ Constants="*uid://dfdi21ywe4wi7"
 StatusLog="*uid://dfugea643ovdh"
 GameManager="*uid://ev67uydlg25a"
 ContractService="*uid://c1jkutauox0qq"
+Transition="*uid://cip0a8ln6fccu"
+TimeSystem="*uid://bud8wvaegken8"
 
 [display]
 
-window/size/viewport_width=1800
-window/size/viewport_height=900
-window/stretch/mode="viewport"
-window/stretch/aspect="expand"
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/size/always_on_top=true
+window/stretch/mode="canvas_items"
+window/stretch/scale_mode="integer"
 
 [input]
 

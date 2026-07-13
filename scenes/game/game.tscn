@@ -1,13 +1,272 @@
 [gd_scene format=3 uid="uid://cvoy6tb7y2olh"]
 
-[ext_resource type="Script" uid="uid://dx1nmnisxhyht" path="res://scripts/core/game.gd" id="1_0sr1o"]
-[ext_resource type="PackedScene" uid="uid://3785qbf8qlui" path="res://scenes/ui/ui.tscn" id="3_kelw5"]
+[ext_resource type="Script" uid="uid://dck6jxumktrxc" path="res://scripts/ui/hud_root.gd" id="4_5i0tg"]
+[ext_resource type="PackedScene" uid="uid://die0ny5mhffo7" path="res://scenes/ui/debug_text_overlay.tscn" id="5_lfrn8"]
 [ext_resource type="PackedScene" uid="uid://lmv6ensfbcuy" path="res://scenes/menus/pause_menu.tscn" id="6_5i0tg"]
 
-[node name="Game" type="Node2D" unique_id=1350833533]
-script = ExtResource("1_0sr1o")
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lfrn8"]
+bg_color = Color(0, 0, 0, 0.64705884)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.59607846, 0.21568628, 1)
 
-[node name="UI" parent="." unique_id=1264776123 instance=ExtResource("3_kelw5")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5i0tg"]
+bg_color = Color(0.08023649, 0.6543952, 0.86288434, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
 
-[node name="PauseMenu" parent="." unique_id=1879502241 instance=ExtResource("6_5i0tg")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bdhmt"]
+bg_color = Color(0.827451, 0.52156866, 0, 1)
+
+[node name="Game" type="Node" unique_id=634578874]
+
+[node name="Systems" type="Node" parent="." unique_id=62218497]
+unique_name_in_owner = true
+
+[node name="BackgroundLayer" type="CanvasLayer" parent="." unique_id=870325998]
+layer = -10
+
+[node name="BackgroundRoot" type="Control" parent="BackgroundLayer" unique_id=403965696]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="BackgroundLayer/BackgroundRoot" unique_id=471193098]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.07058824, 0.078431375, 0.09019608, 1)
+
+[node name="Game" type="Node2D" parent="." unique_id=1860658512]
+
+[node name="Node2D" type="Node2D" parent="Game" unique_id=2603845]
+
+[node name="Node2D2" type="Node2D" parent="Game" unique_id=1407259843]
+
+[node name="Node2D3" type="Node2D" parent="Game" unique_id=373784817]
+
+[node name="HudLayer" type="CanvasLayer" parent="." unique_id=1495163504]
+process_mode = 1
+layer = 10
+
+[node name="HUDRoot" type="Control" parent="HudLayer" unique_id=1460229547]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_5i0tg")
+
+[node name="TopBar" type="HBoxContainer" parent="HudLayer/HUDRoot" unique_id=179775296]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 100.0
+grow_horizontal = 2
+
+[node name="CompanyInfoBox" type="MarginContainer" parent="HudLayer/HUDRoot/TopBar" unique_id=2020397944]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+
+[node name="PanelContainer" type="PanelContainer" parent="HudLayer/HUDRoot/TopBar/CompanyInfoBox" unique_id=434107766]
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lfrn8")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HudLayer/HUDRoot/TopBar/CompanyInfoBox/PanelContainer" unique_id=1147203939]
+layout_mode = 2
+
+[node name="Avatar" type="MarginContainer" parent="HudLayer/HUDRoot/TopBar/CompanyInfoBox/PanelContainer/HBoxContainer" unique_id=643693069]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="AvatarFrame" type="PanelContainer" parent="HudLayer/HUDRoot/TopBar/CompanyInfoBox/PanelContainer/HBoxContainer/Avatar" unique_id=1327786732]
+custom_minimum_size = Vector2(80, 40)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5i0tg")
+
+[node name="SPACER" type="Container" parent="HudLayer/HUDRoot/TopBar/CompanyInfoBox/PanelContainer/HBoxContainer" unique_id=1941267686]
+custom_minimum_size = Vector2(20, 40)
+layout_mode = 2
+
+[node name="CompanyInfos" type="VBoxContainer" parent="HudLayer/HUDRoot/TopBar/CompanyInfoBox/PanelContainer/HBoxContainer" unique_id=1835728124]
+layout_mode = 2
+
+[node name="CompanyName" type="Label" parent="HudLayer/HUDRoot/TopBar/CompanyInfoBox/PanelContainer/HBoxContainer/CompanyInfos" unique_id=1329540946]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+text = "Big C. Company"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MoneyLabel" type="Label" parent="HudLayer/HUDRoot/TopBar/CompanyInfoBox/PanelContainer/HBoxContainer/CompanyInfos" unique_id=1730407413]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 12
+text = "Money"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProgressBar_MarginContainer" type="MarginContainer" parent="HudLayer/HUDRoot/TopBar/CompanyInfoBox/PanelContainer/HBoxContainer/CompanyInfos" unique_id=1674511577]
+layout_mode = 2
+theme_override_constants/margin_bottom = 4
+
+[node name="ProgressBar" type="ProgressBar" parent="HudLayer/HUDRoot/TopBar/CompanyInfoBox/PanelContainer/HBoxContainer/CompanyInfos/ProgressBar_MarginContainer" unique_id=778733358]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 27)
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_styles/fill = SubResource("StyleBoxFlat_bdhmt")
+max_value = 10000.0
+value = 2529.44
+show_percentage = false
+
+[node name="ReputationLabel" type="Label" parent="HudLayer/HUDRoot/TopBar/CompanyInfoBox/PanelContainer/HBoxContainer/CompanyInfos/ProgressBar_MarginContainer/ProgressBar" unique_id=1473701866]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 12
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 1
+justification_flags = 35
+
+[node name="MarginContainer" type="MarginContainer" parent="HudLayer/HUDRoot/TopBar/CompanyInfoBox/PanelContainer/HBoxContainer" unique_id=830765912]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_bottom = 4
+
+[node name="CompanyLevelPanel" type="Label" parent="HudLayer/HUDRoot/TopBar/CompanyInfoBox/PanelContainer/HBoxContainer/MarginContainer" unique_id=1168756451]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 27)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+text = "Lvl. 26"
+
+[node name="SPACER" type="Container" parent="HudLayer/HUDRoot/TopBar" unique_id=375395898]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="GameInfoBox" type="VBoxContainer" parent="HudLayer/HUDRoot/TopBar" unique_id=1349257432]
+custom_minimum_size = Vector2(400, 100)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="TimeLabel" type="Label" parent="HudLayer/HUDRoot/TopBar/GameInfoBox" unique_id=664167157]
+unique_name_in_owner = true
+layout_mode = 2
+text = "00:00:00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ActiveVehiclesLabel" type="Label" parent="HudLayer/HUDRoot/TopBar/GameInfoBox" unique_id=557442320]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Active vehicles: %d"
+
+[node name="IdleVehiclesLabel" type="Label" parent="HudLayer/HUDRoot/TopBar/GameInfoBox" unique_id=110402609]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Idle vehicles: %d"
+
+[node name="BottomContainer" type="VBoxContainer" parent="HudLayer/HUDRoot" unique_id=1720966918]
+custom_minimum_size = Vector2(0, 110)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -150.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="HudLayer/HUDRoot/BottomContainer" unique_id=1462769166]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_right = 4
+
+[node name="VehicleArea" type="ScrollContainer" parent="HudLayer/HUDRoot/BottomContainer/MarginContainer" unique_id=1309854690]
+custom_minimum_size = Vector2(200, 150)
+layout_mode = 2
+size_flags_vertical = 8
+vertical_scroll_mode = 0
+
+[node name="VehicleHolder" type="HBoxContainer" parent="HudLayer/HUDRoot/BottomContainer/MarginContainer/VehicleArea" unique_id=241812827]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 12
+
+[node name="StatusArea" type="MarginContainer" parent="HudLayer/HUDRoot/BottomContainer" unique_id=39460801]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 1
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="StatusBar" type="PanelContainer" parent="HudLayer/HUDRoot/BottomContainer/StatusArea" unique_id=1283807277]
+layout_mode = 2
+
+[node name="StatusLabel" type="Label" parent="HudLayer/HUDRoot/BottomContainer/StatusArea/StatusBar" unique_id=1401271101]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="PauseLayer" parent="." unique_id=1879502241 instance=ExtResource("6_5i0tg")]
+process_mode = 2
+layer = 20
 visible = false
+script = null
+
+[node name="PauseRoot" type="Control" parent="PauseLayer" unique_id=1212863171]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DebugLayer" type="CanvasLayer" parent="." unique_id=394262597]
+process_mode = 3
+layer = 128
+
+[node name="DebugRoot" type="Control" parent="DebugLayer" unique_id=955387613]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+mouse_behavior_recursive = 1
+
+[node name="DebugTextOverlay" parent="DebugLayer/DebugRoot" unique_id=596725966 instance=ExtResource("5_lfrn8")]
+layout_mode = 1
+mouse_filter = 2
+mouse_behavior_recursive = 1
