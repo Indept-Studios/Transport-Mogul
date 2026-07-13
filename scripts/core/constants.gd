@@ -5,7 +5,9 @@ const DEBUGFLAG = false
 
 #region general
 const SAVE_PATH := "user://savegame.json"
-const SAVE_VERSION := 1
+const SAVE_VERSION := 2
+const GAME_SCENE:= "uid://cvoy6tb7y2olh"
+const MAIN_SCENE:= "uid://dgtixi54nyyd6"
 #endregion
 
 #region Start

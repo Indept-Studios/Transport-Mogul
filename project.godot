@@ -25,6 +25,7 @@ GameManager="*uid://ev67uydlg25a"
 ContractService="*uid://c1jkutauox0qq"
 Transition="*uid://cip0a8ln6fccu"
 TimeSystem="*uid://bud8wvaegken8"
+SavegameManager="*uid://bwo1nw8y056ot"
 
 [display]
 

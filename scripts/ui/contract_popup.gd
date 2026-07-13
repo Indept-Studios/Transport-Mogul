@@ -37,7 +37,7 @@ func show_for_vehicle(vehicle: Vehicle) -> void:
 		var c: Contract = vehicle.available_contracts[i]
 
 		var type_part := ""
-		if Gamestate.get_reputation_tier() >= 2:
+		if Gamestate.calculate_reputation_tier() >= 2:
 			if Gamestate.reputation >= 50:
 				var tag := "STD"
 				if c.type == "express":

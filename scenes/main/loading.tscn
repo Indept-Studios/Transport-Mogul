@@ -1,0 +1,101 @@
+[gd_scene format=3 uid="uid://cnrfudn8evfj7"]
+
+[ext_resource type="Script" uid="uid://ispmpwh4wfda" path="res://scripts/core/loading.gd" id="1_4dq2l"]
+[ext_resource type="PackedScene" uid="uid://die0ny5mhffo7" path="res://scenes/ui/debug_text_overlay.tscn" id="1_niw6l"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_niw6l"]
+
+[node name="LoadingMenu" type="Control" unique_id=396316333]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4dq2l")
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1701568026]
+layer = 10
+
+[node name="UIRoot" type="Control" parent="UI" unique_id=385240173]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="UI/UIRoot" unique_id=194313236]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_niw6l")
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/UIRoot/Panel" unique_id=1657507734]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/UIRoot/Panel/CenterContainer" unique_id=30112131]
+layout_mode = 2
+
+[node name="Holder" type="VBoxContainer" parent="UI/UIRoot/Panel/CenterContainer/VBoxContainer" unique_id=1999904393]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="BackBtn" type="Button" parent="UI/UIRoot/Panel/CenterContainer/VBoxContainer" unique_id=212906963]
+custom_minimum_size = Vector2(120, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "BACK"
+
+[node name="Background_Layer" type="CanvasLayer" parent="." unique_id=202813607]
+layer = -10
+
+[node name="BackgroundRoot" type="Control" parent="Background_Layer" unique_id=920820443]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="Background_Layer/BackgroundRoot" unique_id=1030924726]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.07058824, 0.078431375, 0.09019608, 1)
+
+[node name="DebugLayer" type="CanvasLayer" parent="." unique_id=1930497941]
+process_mode = 3
+layer = 128
+
+[node name="DebugRoot" type="Control" parent="DebugLayer" unique_id=96043481]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+mouse_behavior_recursive = 1
+
+[node name="DebugTextOverlay" parent="DebugLayer/DebugRoot" unique_id=596725966 instance=ExtResource("1_niw6l")]
+layout_mode = 1
+
+[connection signal="pressed" from="UI/UIRoot/Panel/CenterContainer/VBoxContainer/BackBtn" to="." method="_on_back_btn_pressed"]

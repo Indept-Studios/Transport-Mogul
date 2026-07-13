@@ -2,7 +2,7 @@ extends Node
 
 signal updated(date_time: DateTime)
 
-@export var ticks_per_second: int = 6
+@export var ticks_per_second: int = 1
 
 var date_time := DateTime.new()
 

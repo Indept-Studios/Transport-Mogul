@@ -5,7 +5,7 @@ var duration: float = 0.0
 var reward: int = 0
 var reputation_gain: int = 0
 var type: String = "standard"
-var contract_tier: int  = Gamestate.get_reputation_tier()
+var contract_tier: int  = Gamestate.calculate_reputation_tier()
 
 func to_dict() -> Dictionary:
 	return {

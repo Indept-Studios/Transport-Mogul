@@ -3,7 +3,7 @@ extends Node
 
 func generate_contracts_for(vehicle: Vehicle) -> void:
 	vehicle.available_contracts.clear()
-	var base_tier := Gamestate.get_reputation_tier()
+	var base_tier := Gamestate.calculate_reputation_tier()
 	for i in 3:
 		var offer_tier := _pick_offer_tier(base_tier)
 		vehicle.available_contracts.append(generate_contract(offer_tier))

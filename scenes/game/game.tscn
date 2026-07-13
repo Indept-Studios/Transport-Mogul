@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://cvoy6tb7y2olh"]
 
+[ext_resource type="PackedScene" uid="uid://usv6qp8wfnlq" path="res://scenes/ui/contract_popup.tscn" id="2_kelw5"]
 [ext_resource type="Script" uid="uid://dck6jxumktrxc" path="res://scripts/ui/hud_root.gd" id="4_5i0tg"]
+[ext_resource type="Script" uid="uid://chtmuj3u4v5hk" path="res://scripts/core/pause.gd" id="4_bdhmt"]
+[ext_resource type="Script" uid="uid://bys8ksqfix7rf" path="res://scripts/core/debug_root.gd" id="4_lfrn8"]
 [ext_resource type="PackedScene" uid="uid://die0ny5mhffo7" path="res://scenes/ui/debug_text_overlay.tscn" id="5_lfrn8"]
-[ext_resource type="PackedScene" uid="uid://lmv6ensfbcuy" path="res://scenes/menus/pause_menu.tscn" id="6_5i0tg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lfrn8"]
 bg_color = Color(0, 0, 0, 0.64705884)
@@ -23,6 +25,7 @@ border_width_bottom = 2
 bg_color = Color(0.827451, 0.52156866, 0, 1)
 
 [node name="Game" type="Node" unique_id=634578874]
+process_mode = 3
 
 [node name="Systems" type="Node" parent="." unique_id=62218497]
 unique_name_in_owner = true
@@ -48,6 +51,7 @@ grow_vertical = 2
 color = Color(0.07058824, 0.078431375, 0.09019608, 1)
 
 [node name="Game" type="Node2D" parent="." unique_id=1860658512]
+process_mode = 1
 
 [node name="Node2D" type="Node2D" parent="Game" unique_id=2603845]
 
@@ -193,6 +197,15 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Idle vehicles: %d"
 
+[node name="PopupLayer" parent="HudLayer/HUDRoot" unique_id=1131899652 instance=ExtResource("2_kelw5")]
+process_mode = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
 [node name="BottomContainer" type="VBoxContainer" parent="HudLayer/HUDRoot" unique_id=1720966918]
 custom_minimum_size = Vector2(0, 110)
 layout_mode = 1
@@ -238,19 +251,85 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="PauseLayer" parent="." unique_id=1879502241 instance=ExtResource("6_5i0tg")]
-process_mode = 2
+[node name="PauseLayer" type="CanvasLayer" parent="." unique_id=1011756790]
+process_mode = 1
 layer = 20
-visible = false
-script = null
 
 [node name="PauseRoot" type="Control" parent="PauseLayer" unique_id=1212863171]
+process_mode = 3
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("4_bdhmt")
+
+[node name="PanelContainer" type="PanelContainer" parent="PauseLayer/PauseRoot" unique_id=930236114]
+process_mode = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PauseLayer/PauseRoot/PanelContainer" unique_id=1514036592]
+process_mode = 2
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseLayer/PauseRoot/PanelContainer/MarginContainer" unique_id=1500684740]
+process_mode = 2
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="TitelLabel" type="Label" parent="PauseLayer/PauseRoot/PanelContainer/MarginContainer/VBoxContainer" unique_id=1106642680]
+process_mode = 2
+layout_mode = 2
+text = " Game Paused "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ResumeButton" type="Button" parent="PauseLayer/PauseRoot/PanelContainer/MarginContainer/VBoxContainer" unique_id=1121722265]
+unique_name_in_owner = true
+process_mode = 2
+layout_mode = 2
+text = "Resume"
+
+[node name="SaveButton" type="Button" parent="PauseLayer/PauseRoot/PanelContainer/MarginContainer/VBoxContainer" unique_id=1318164796]
+unique_name_in_owner = true
+process_mode = 2
+layout_mode = 2
+text = "Save Game"
+
+[node name="LoadButton" type="Button" parent="PauseLayer/PauseRoot/PanelContainer/MarginContainer/VBoxContainer" unique_id=1793661703]
+unique_name_in_owner = true
+process_mode = 2
+layout_mode = 2
+text = "Load Game"
+
+[node name="QuitToMenuButton" type="Button" parent="PauseLayer/PauseRoot/PanelContainer/MarginContainer/VBoxContainer" unique_id=1018837909]
+unique_name_in_owner = true
+process_mode = 2
+layout_mode = 2
+text = "Quit to Main Menu"
+
+[node name="QuitGameButton" type="Button" parent="PauseLayer/PauseRoot/PanelContainer/MarginContainer/VBoxContainer" unique_id=1849287822]
+unique_name_in_owner = true
+process_mode = 2
+layout_mode = 2
+text = "Quit to Desktop"
 
 [node name="DebugLayer" type="CanvasLayer" parent="." unique_id=394262597]
 process_mode = 3
@@ -264,9 +343,32 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-mouse_behavior_recursive = 1
+script = ExtResource("4_lfrn8")
 
 [node name="DebugTextOverlay" parent="DebugLayer/DebugRoot" unique_id=596725966 instance=ExtResource("5_lfrn8")]
 layout_mode = 1
 mouse_filter = 2
 mouse_behavior_recursive = 1
+
+[node name="BuyButton(DEBUG)" type="Button" parent="DebugLayer/DebugRoot" unique_id=12372840]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.0
+offset_top = -299.0
+offset_right = 40.0
+offset_bottom = -245.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Buy
+10.000 $"
+
+[connection signal="pressed" from="PauseLayer/PauseRoot/PanelContainer/MarginContainer/VBoxContainer/ResumeButton" to="PauseLayer/PauseRoot" method="_on_resume_button_pressed"]
+[connection signal="pressed" from="PauseLayer/PauseRoot/PanelContainer/MarginContainer/VBoxContainer/SaveButton" to="PauseLayer/PauseRoot" method="_on_save_button_pressed"]
+[connection signal="pressed" from="PauseLayer/PauseRoot/PanelContainer/MarginContainer/VBoxContainer/LoadButton" to="PauseLayer/PauseRoot" method="_on_load_button_pressed"]
+[connection signal="pressed" from="PauseLayer/PauseRoot/PanelContainer/MarginContainer/VBoxContainer/QuitToMenuButton" to="PauseLayer/PauseRoot" method="_on_quit_to_menu_button_pressed"]
+[connection signal="pressed" from="PauseLayer/PauseRoot/PanelContainer/MarginContainer/VBoxContainer/QuitGameButton" to="PauseLayer/PauseRoot" method="_on_quit_game_button_pressed"]
+[connection signal="pressed" from="DebugLayer/DebugRoot/BuyButton(DEBUG)" to="DebugLayer/DebugRoot" method="_on_buy_button_debug_pressed"]
