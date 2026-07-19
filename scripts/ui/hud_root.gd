@@ -13,7 +13,6 @@ const VEHICLE_CARD = preload("uid://c2rgh1g0l64ud")
 @onready var bottom_container = $BottomContainer
 @onready var vehicles_label = %VehiclesLabel
 
-
 func _ready():
 	TimeSystem.updated.connect(update_clock)
 	update_clock(TimeSystem.date_time)

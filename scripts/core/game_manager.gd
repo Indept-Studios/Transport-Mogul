@@ -89,13 +89,6 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("save_game"):
 		SavegameManager.save_game()
 		get_viewport().set_input_as_handled()
-	#if event.is_action_pressed("load_game"):
-		#if Gamestate.load_game():
-			#start_from_loaded_game()
-			#Engine.time_scale = 1.0
-			#get_tree().paused = false
-			#_on_vehicles_changed()
-		#get_viewport().set_input_as_handled()
 #endregion
 
 #region Vehicle

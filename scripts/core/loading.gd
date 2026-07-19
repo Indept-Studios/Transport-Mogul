@@ -20,7 +20,6 @@ func _on_load_pressed(save_path: String) -> void:
 	await _transition()
 	get_tree().change_scene_to_file(Constants.GAME_SCENE)
 
-	
 func _transition():
 	Transition.play_transistion()
 	await Transition.on_transition_finished

@@ -12,7 +12,6 @@ extends CanvasLayer
 @onready var quit_game_button = $PopupLayer/PanelContainer/MarginContainer/VBoxContainer/QuitGameButton
 @onready var save_flash: ColorRect = $SaveFlash
 
-
 var _pending_quit_mode: String = ""
 var game_ui: CanvasLayer
 var game: Node = null

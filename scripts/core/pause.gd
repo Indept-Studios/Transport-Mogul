@@ -33,16 +33,13 @@ func pause():
 func _on_resume_button_pressed():
 	resume()
 
-
 func _on_save_button_pressed():
 	SavegameManager.save_game()
-
 
 func _on_load_button_pressed():
 	resume()
 	await _transition()
 	get_tree().change_scene_to_file("uid://cnrfudn8evfj7")
-
 
 func _on_quit_to_menu_button_pressed():
 	resume()

@@ -32,12 +32,10 @@ func _on_resolution_btn_item_selected(index):
 		3:
 			DisplayServer.window_set_size(Vector2i(2560,1440))
 
-
 func _on_back_btn_pressed():
 	Transition.play_transistion()
 	await Transition.on_transition_finished
 	get_tree().change_scene_to_file("uid://dgtixi54nyyd6")
-
 
 func _on_translation_btn_item_selected(index):
 	match index:

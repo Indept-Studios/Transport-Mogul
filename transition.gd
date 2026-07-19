@@ -15,7 +15,6 @@ func _on_animation_finished(anim_name):
 		animation_player.play("FADE_TO_NORMAL")
 	elif anim_name == "FADE_TO_NORMAL":
 		color_rect.visible = false
-	
 
 func play_transistion():
 	color_rect.visible = true
