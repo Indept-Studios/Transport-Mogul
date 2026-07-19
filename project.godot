@@ -47,6 +47,10 @@ load_game={
 ]
 }
 
+[internationalization]
+
+locale/translations=PackedStringArray("res://Translation.de.translation", "res://Translation.en.translation")
+
 [physics]
 
 3d/physics_engine="Jolt Physics"

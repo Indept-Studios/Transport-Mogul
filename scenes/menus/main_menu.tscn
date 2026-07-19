@@ -61,25 +61,25 @@ vertical_alignment = 1
 unique_name_in_owner = true
 custom_minimum_size = Vector2(120, 40)
 layout_mode = 2
-text = "New Game"
+text = "NEW_GAME_BUTTON"
 
 [node name="LoadBtn" type="Button" parent="UI/UIRoot/Panel/CenterContainer/VBoxContainer" unique_id=981257416]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(120, 40)
 layout_mode = 2
-text = "Load Game"
+text = "LOAD_BUTTON"
 
 [node name="OptionsBtn" type="Button" parent="UI/UIRoot/Panel/CenterContainer/VBoxContainer" unique_id=723590108]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(120, 40)
 layout_mode = 2
-text = "Options"
+text = "OPTIONS_BUTTON"
 
 [node name="ExitBtn" type="Button" parent="UI/UIRoot/Panel/CenterContainer/VBoxContainer" unique_id=731996776]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(120, 40)
 layout_mode = 2
-text = "Exit"
+text = "EXIT_BUTTON"
 
 [node name="Background_Layer" type="CanvasLayer" parent="." unique_id=662272131]
 layer = -10
