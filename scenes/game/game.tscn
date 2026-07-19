@@ -377,11 +377,6 @@ script = ExtResource("4_lfrn8")
 
 [node name="DebugTextOverlay" parent="DebugLayer/DebugRoot" unique_id=596725966 instance=ExtResource("5_lfrn8")]
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-grow_horizontal = 0
-grow_vertical = 0
 mouse_filter = 2
 mouse_behavior_recursive = 1
 
