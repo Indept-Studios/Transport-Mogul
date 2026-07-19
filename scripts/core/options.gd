@@ -24,16 +24,12 @@ func _on_mute_btn_toggled(toggled_on):
 func _on_resolution_btn_item_selected(index):
 	match index:
 		0:
-			resolution_btn.select(0)
 			DisplayServer.window_set_size(Vector2i(1280,720))
 		1:
-			resolution_btn.select(1)
 			DisplayServer.window_set_size(Vector2i(1600,900))
 		2:
-			resolution_btn.select(2)
 			DisplayServer.window_set_size(Vector2i(1920,1080))
 		3:
-			resolution_btn.select(3)
 			DisplayServer.window_set_size(Vector2i(2560,1440))
 
 
