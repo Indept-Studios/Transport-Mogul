@@ -1,0 +1,89 @@
+[gd_scene format=3 uid="uid://poj7efbf6d4v"]
+
+[ext_resource type="Script" uid="uid://bxekima4nxi7a" path="res://scripts/core/options.gd" id="1_bp0ux"]
+
+[node name="Options" type="Control" unique_id=172036277]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bp0ux")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1380479654]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer" unique_id=1740056549]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/MarginContainer" unique_id=317748247]
+layout_mode = 2
+
+[node name="VolumeLabel" type="Label" parent="CenterContainer/MarginContainer/VBoxContainer" unique_id=338544933]
+layout_mode = 2
+text = "VOLUME_LABEL"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Volume" type="HSlider" parent="CenterContainer/MarginContainer/VBoxContainer" unique_id=621430417]
+layout_mode = 2
+
+[node name="MuteBtnLabel" type="Label" parent="CenterContainer/MarginContainer/VBoxContainer" unique_id=146123678]
+layout_mode = 2
+text = "MUTE_LABEL"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="CenterContainer/MarginContainer/VBoxContainer" unique_id=830760144]
+layout_mode = 2
+
+[node name="MuteBtn" type="CheckButton" parent="CenterContainer/MarginContainer/VBoxContainer/CenterContainer" unique_id=1379515640]
+layout_mode = 2
+
+[node name="ResolutionBtn" type="OptionButton" parent="CenterContainer/MarginContainer/VBoxContainer" unique_id=1768747772]
+layout_mode = 2
+selected = 0
+item_count = 4
+popup/item_0/text = "1280x720"
+popup/item_0/id = 0
+popup/item_1/text = "1600x900"
+popup/item_1/id = 1
+popup/item_2/text = "1920x1080"
+popup/item_2/id = 2
+popup/item_3/text = "2560x1440"
+popup/item_3/id = 3
+
+[node name="BackBtn" type="Button" parent="CenterContainer/MarginContainer/VBoxContainer" unique_id=1832895208]
+layout_mode = 2
+text = "RETURN_BUTTON"
+
+[node name="BackgroundLayer" type="CanvasLayer" parent="." unique_id=1182775498]
+layer = -10
+
+[node name="BackgroundRoot" type="Control" parent="BackgroundLayer" unique_id=1798113012]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="BackgroundLayer/BackgroundRoot" unique_id=1562603382]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.07058824, 0.078431375, 0.09019608, 1)
+
+[connection signal="value_changed" from="CenterContainer/MarginContainer/VBoxContainer/Volume" to="." method="_on_volume_value_changed"]
+[connection signal="toggled" from="CenterContainer/MarginContainer/VBoxContainer/CenterContainer/MuteBtn" to="." method="_on_mute_btn_toggled"]
+[connection signal="item_selected" from="CenterContainer/MarginContainer/VBoxContainer/ResolutionBtn" to="." method="_on_resolution_btn_item_selected"]
+[connection signal="pressed" from="CenterContainer/MarginContainer/VBoxContainer/BackBtn" to="." method="_on_back_btn_pressed"]

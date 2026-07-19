@@ -14,7 +14,7 @@ func _on_load_btn_pressed():
 
 func _on_options_btn_pressed():
 	await _transition()
-	get_tree().change_scene_to_packed(null)
+	get_tree().change_scene_to_file("uid://poj7efbf6d4v")
 
 func _on_exit_btn_pressed():
 	get_tree().quit()

@@ -31,7 +31,6 @@ SavegameManager="*uid://bwo1nw8y056ot"
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
-window/size/borderless=true
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 window/stretch/scale_mode="integer"
