@@ -39,7 +39,9 @@ func _on_save_button_pressed():
 
 
 func _on_load_button_pressed():
-	pass # Replace with function body.
+	resume()
+	await _transition()
+	get_tree().change_scene_to_file("uid://cnrfudn8evfj7")
 
 
 func _on_quit_to_menu_button_pressed():

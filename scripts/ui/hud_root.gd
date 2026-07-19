@@ -11,8 +11,8 @@ const VEHICLE_CARD = preload("uid://c2rgh1g0l64ud")
 @onready var status_label = %StatusLabel
 @onready var popup_layer = $PopupLayer
 @onready var bottom_container = $BottomContainer
-@onready var active_vehicles_label = %ActiveVehiclesLabel
-@onready var idle_vehicles_label = %IdleVehiclesLabel
+@onready var vehicles_label = %VehiclesLabel
+
 
 func _ready():
 	TimeSystem.updated.connect(update_clock)
@@ -43,8 +43,7 @@ func update_vehicle_status() -> void:
 			idle += 1
 		else:
 			active += 1
-	active_vehicles_label.text = "Active vehicles: %d" % active
-	idle_vehicles_label.text = "Idle vehicles: %d" % idle
+	vehicles_label.text = str("T: ", idle, "/", Gamestate.vehicles.size())
 
 func update_clock(date_time: DateTime) -> void:
 	time_label.text = "%02d:%02d:%02d" % [

@@ -81,6 +81,7 @@ offset_bottom = 100.0
 grow_horizontal = 2
 
 [node name="CompanyInfoBox" type="MarginContainer" parent="HudLayer/HUDRoot/TopBar" unique_id=2020397944]
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
@@ -101,18 +102,25 @@ theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
 [node name="AvatarFrame" type="PanelContainer" parent="HudLayer/HUDRoot/TopBar/CompanyInfoBox/PanelContainer/HBoxContainer/Avatar" unique_id=1327786732]
-custom_minimum_size = Vector2(80, 40)
+custom_minimum_size = Vector2(115, 115)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_5i0tg")
 
-[node name="SPACER" type="Container" parent="HudLayer/HUDRoot/TopBar/CompanyInfoBox/PanelContainer/HBoxContainer" unique_id=1941267686]
+[node name="SPACER_LEFT" type="Container" parent="HudLayer/HUDRoot/TopBar/CompanyInfoBox/PanelContainer/HBoxContainer" unique_id=1941267686]
 custom_minimum_size = Vector2(20, 40)
 layout_mode = 2
 
-[node name="CompanyInfos" type="VBoxContainer" parent="HudLayer/HUDRoot/TopBar/CompanyInfoBox/PanelContainer/HBoxContainer" unique_id=1835728124]
+[node name="CompanyInfos" type="MarginContainer" parent="HudLayer/HUDRoot/TopBar/CompanyInfoBox/PanelContainer/HBoxContainer" unique_id=1243158518]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="HBoxContainer" type="VBoxContainer" parent="HudLayer/HUDRoot/TopBar/CompanyInfoBox/PanelContainer/HBoxContainer/CompanyInfos" unique_id=1835728124]
 layout_mode = 2
 
-[node name="CompanyName" type="Label" parent="HudLayer/HUDRoot/TopBar/CompanyInfoBox/PanelContainer/HBoxContainer/CompanyInfos" unique_id=1329540946]
+[node name="CompanyName" type="Label" parent="HudLayer/HUDRoot/TopBar/CompanyInfoBox/PanelContainer/HBoxContainer/CompanyInfos/HBoxContainer" unique_id=1329540946]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
@@ -120,7 +128,7 @@ text = "Big C. Company"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MoneyLabel" type="Label" parent="HudLayer/HUDRoot/TopBar/CompanyInfoBox/PanelContainer/HBoxContainer/CompanyInfos" unique_id=1730407413]
+[node name="MoneyLabel" type="Label" parent="HudLayer/HUDRoot/TopBar/CompanyInfoBox/PanelContainer/HBoxContainer/CompanyInfos/HBoxContainer" unique_id=1730407413]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
@@ -129,11 +137,14 @@ text = "Money"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ProgressBar_MarginContainer" type="MarginContainer" parent="HudLayer/HUDRoot/TopBar/CompanyInfoBox/PanelContainer/HBoxContainer/CompanyInfos" unique_id=1674511577]
+[node name="ProgressBar_MarginContainer" type="MarginContainer" parent="HudLayer/HUDRoot/TopBar/CompanyInfoBox/PanelContainer/HBoxContainer/CompanyInfos/HBoxContainer" unique_id=1674511577]
 layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
-[node name="ProgressBar" type="ProgressBar" parent="HudLayer/HUDRoot/TopBar/CompanyInfoBox/PanelContainer/HBoxContainer/CompanyInfos/ProgressBar_MarginContainer" unique_id=778733358]
+[node name="ProgressBar" type="ProgressBar" parent="HudLayer/HUDRoot/TopBar/CompanyInfoBox/PanelContainer/HBoxContainer/CompanyInfos/HBoxContainer/ProgressBar_MarginContainer" unique_id=778733358]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 27)
 layout_mode = 2
@@ -143,7 +154,7 @@ max_value = 10000.0
 value = 2529.44
 show_percentage = false
 
-[node name="ReputationLabel" type="Label" parent="HudLayer/HUDRoot/TopBar/CompanyInfoBox/PanelContainer/HBoxContainer/CompanyInfos/ProgressBar_MarginContainer/ProgressBar" unique_id=1473701866]
+[node name="ReputationLabel" type="Label" parent="HudLayer/HUDRoot/TopBar/CompanyInfoBox/PanelContainer/HBoxContainer/CompanyInfos/HBoxContainer/ProgressBar_MarginContainer/ProgressBar" unique_id=1473701866]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -157,18 +168,45 @@ vertical_alignment = 1
 autowrap_mode = 1
 justification_flags = 35
 
+[node name="SPACER_RIGHT" type="Container" parent="HudLayer/HUDRoot/TopBar/CompanyInfoBox/PanelContainer/HBoxContainer" unique_id=1566933628]
+custom_minimum_size = Vector2(20, 40)
+layout_mode = 2
+
 [node name="MarginContainer" type="MarginContainer" parent="HudLayer/HUDRoot/TopBar/CompanyInfoBox/PanelContainer/HBoxContainer" unique_id=830765912]
+custom_minimum_size = Vector2(115, 115)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
-[node name="CompanyLevelPanel" type="Label" parent="HudLayer/HUDRoot/TopBar/CompanyInfoBox/PanelContainer/HBoxContainer/MarginContainer" unique_id=1168756451]
+[node name="VBoxContainer" type="VBoxContainer" parent="HudLayer/HUDRoot/TopBar/CompanyInfoBox/PanelContainer/HBoxContainer/MarginContainer" unique_id=2101541387]
+layout_mode = 2
+
+[node name="SPACER_TOP" type="Container" parent="HudLayer/HUDRoot/TopBar/CompanyInfoBox/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer" unique_id=1988190875]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="VehiclesLabel" type="Label" parent="HudLayer/HUDRoot/TopBar/CompanyInfoBox/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer" unique_id=70734862]
+unique_name_in_owner = true
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SPACER_BOTTOM" type="Container" parent="HudLayer/HUDRoot/TopBar/CompanyInfoBox/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer" unique_id=807247354]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="CompanyLevelPanel" type="Label" parent="HudLayer/HUDRoot/TopBar/CompanyInfoBox/PanelContainer/HBoxContainer/MarginContainer/VBoxContainer" unique_id=1168756451]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 27)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
 text = "Lvl. 26"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="SPACER" type="Container" parent="HudLayer/HUDRoot/TopBar" unique_id=375395898]
 layout_mode = 2

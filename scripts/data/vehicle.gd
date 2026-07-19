@@ -12,6 +12,7 @@ var remaining_time: float = 0.0
 func _init():
 	id = _next_id
 	_next_id += 1
+	print(_next_id)
 
 func to_dict() -> Dictionary:
 	return {
