@@ -62,6 +62,7 @@ process_mode = 1
 [node name="HudLayer" type="CanvasLayer" parent="." unique_id=1495163504]
 process_mode = 1
 layer = 10
+follow_viewport_enabled = true
 
 [node name="HUDRoot" type="Control" parent="HudLayer" unique_id=1460229547]
 unique_name_in_owner = true
@@ -75,9 +76,10 @@ script = ExtResource("4_5i0tg")
 
 [node name="TopBar" type="HBoxContainer" parent="HudLayer/HUDRoot" unique_id=179775296]
 layout_mode = 1
-anchors_preset = 10
+anchors_preset = -1
 anchor_right = 1.0
-offset_bottom = 100.0
+anchor_bottom = 0.19000001
+offset_bottom = 0.19999695
 grow_horizontal = 2
 
 [node name="CompanyInfoBox" type="MarginContainer" parent="HudLayer/HUDRoot/TopBar" unique_id=2020397944]
@@ -224,16 +226,6 @@ layout_mode = 2
 text = "00:00:00"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="ActiveVehiclesLabel" type="Label" parent="HudLayer/HUDRoot/TopBar/GameInfoBox" unique_id=557442320]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Active vehicles: %d"
-
-[node name="IdleVehiclesLabel" type="Label" parent="HudLayer/HUDRoot/TopBar/GameInfoBox" unique_id=110402609]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Idle vehicles: %d"
 
 [node name="PopupLayer" parent="HudLayer/HUDRoot" unique_id=1131899652 instance=ExtResource("2_kelw5")]
 process_mode = 1
@@ -385,6 +377,11 @@ script = ExtResource("4_lfrn8")
 
 [node name="DebugTextOverlay" parent="DebugLayer/DebugRoot" unique_id=596725966 instance=ExtResource("5_lfrn8")]
 layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+grow_horizontal = 0
+grow_vertical = 0
 mouse_filter = 2
 mouse_behavior_recursive = 1
 
