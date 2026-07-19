@@ -1,14 +1,18 @@
 extends Control
 
 @onready var resolution_btn = $CenterContainer/MarginContainer/VBoxContainer/ResolutionBtn
+@onready var translation_btn = $CenterContainer/MarginContainer/VBoxContainer/TranslationBtn
 
 func _ready():
-	var current := DisplayServer.window_get_size()
-	print(resolution_btn.item_count)
+	var current_win_size := DisplayServer.window_get_size()
 	for i in resolution_btn.item_count:
-		if resolution_btn.get_item_text(i) == "%dx%d" % [current.x, current.y]:
+		if resolution_btn.get_item_text(i) == "%dx%d" % [current_win_size.x, current_win_size.y]:
 			resolution_btn.select(i)
-			print(i)
+			break
+	var current_translation :=TranslationServer.get_locale()
+	for i in translation_btn.item_count:
+		if translation_btn.get_item_text(i) == "%d":
+			translation_btn.select(i)
 			break
 
 func _on_volume_value_changed(value):
@@ -37,3 +41,11 @@ func _on_back_btn_pressed():
 	Transition.play_transistion()
 	await Transition.on_transition_finished
 	get_tree().change_scene_to_file("uid://dgtixi54nyyd6")
+
+
+func _on_translation_btn_item_selected(index):
+	match index:
+		0:
+			TranslationServer.set_locale("en")
+		1:
+			TranslationServer.set_locale("de")

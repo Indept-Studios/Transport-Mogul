@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://poj7efbf6d4v"]
 
 [ext_resource type="Script" uid="uid://bxekima4nxi7a" path="res://scripts/core/options.gd" id="1_bp0ux"]
+[ext_resource type="Script" uid="uid://bys8ksqfix7rf" path="res://scripts/core/debug_root.gd" id="2_ohqpn"]
+[ext_resource type="PackedScene" uid="uid://die0ny5mhffo7" path="res://scenes/ui/debug_text_overlay.tscn" id="3_3aff8"]
 
 [node name="Options" type="Control" unique_id=172036277]
 layout_mode = 3
@@ -24,6 +26,21 @@ layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/MarginContainer" unique_id=317748247]
 layout_mode = 2
+
+[node name="TranslationLabel" type="Label" parent="CenterContainer/MarginContainer/VBoxContainer" unique_id=837298309]
+layout_mode = 2
+text = "TRANSLATION_LABEL_OPTIONSMENU"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TranslationBtn" type="OptionButton" parent="CenterContainer/MarginContainer/VBoxContainer" unique_id=2081188525]
+layout_mode = 2
+selected = 0
+item_count = 2
+popup/item_0/text = "Englisch"
+popup/item_0/id = 0
+popup/item_1/text = "Deutsch"
+popup/item_1/id = 1
 
 [node name="VolumeLabel" type="Label" parent="CenterContainer/MarginContainer/VBoxContainer" unique_id=338544933]
 layout_mode = 2
@@ -84,6 +101,26 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.07058824, 0.078431375, 0.09019608, 1)
 
+[node name="DebugLayer" type="CanvasLayer" parent="." unique_id=69594964]
+process_mode = 3
+layer = 128
+
+[node name="DebugRoot" type="Control" parent="DebugLayer" unique_id=1412652027]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("2_ohqpn")
+
+[node name="DebugTextOverlay" parent="DebugLayer/DebugRoot" unique_id=596725966 instance=ExtResource("3_3aff8")]
+layout_mode = 1
+mouse_filter = 2
+mouse_behavior_recursive = 1
+
+[connection signal="item_selected" from="CenterContainer/MarginContainer/VBoxContainer/TranslationBtn" to="." method="_on_translation_btn_item_selected"]
 [connection signal="value_changed" from="CenterContainer/MarginContainer/VBoxContainer/Volume" to="." method="_on_volume_value_changed"]
 [connection signal="toggled" from="CenterContainer/MarginContainer/VBoxContainer/CenterContainer/MuteBtn" to="." method="_on_mute_btn_toggled"]
 [connection signal="item_selected" from="CenterContainer/MarginContainer/VBoxContainer/ResolutionBtn" to="." method="_on_resolution_btn_item_selected"]
