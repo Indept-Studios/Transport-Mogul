@@ -327,39 +327,44 @@ theme_override_constants/separation = 4
 [node name="TitelLabel" type="Label" parent="PauseLayer/PauseRoot/PanelContainer/MarginContainer/VBoxContainer" unique_id=1106642680]
 process_mode = 2
 layout_mode = 2
-text = " Game Paused "
+text = "TITLELABEL_PAUSMENU"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ResumeButton" type="Button" parent="PauseLayer/PauseRoot/PanelContainer/MarginContainer/VBoxContainer" unique_id=1121722265]
 unique_name_in_owner = true
 process_mode = 2
+custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
-text = "Resume"
+text = "RESUME_BUTTON_PAUSMENU"
 
 [node name="SaveButton" type="Button" parent="PauseLayer/PauseRoot/PanelContainer/MarginContainer/VBoxContainer" unique_id=1318164796]
 unique_name_in_owner = true
 process_mode = 2
+custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
-text = "Save Game"
+text = "SAVE_BUTTON_PAUSMENU"
 
 [node name="LoadButton" type="Button" parent="PauseLayer/PauseRoot/PanelContainer/MarginContainer/VBoxContainer" unique_id=1793661703]
 unique_name_in_owner = true
 process_mode = 2
+custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
-text = "Load Game"
+text = "LOAD_BUTTON_PAUSMENU"
 
 [node name="QuitToMenuButton" type="Button" parent="PauseLayer/PauseRoot/PanelContainer/MarginContainer/VBoxContainer" unique_id=1018837909]
 unique_name_in_owner = true
 process_mode = 2
+custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
-text = "Quit to Main Menu"
+text = "QUIT_BUTTON_TO_MAINMENU"
 
 [node name="QuitGameButton" type="Button" parent="PauseLayer/PauseRoot/PanelContainer/MarginContainer/VBoxContainer" unique_id=1849287822]
 unique_name_in_owner = true
 process_mode = 2
+custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
-text = "Quit to Desktop"
+text = "QUIT_BUTTON_TO_DESKTOP"
 
 [node name="DebugLayer" type="CanvasLayer" parent="." unique_id=394262597]
 process_mode = 3
