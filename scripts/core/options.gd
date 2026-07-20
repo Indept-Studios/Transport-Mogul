@@ -11,7 +11,7 @@ func _ready():
 			break
 	var current_translation :=TranslationServer.get_locale()
 	for i in translation_btn.item_count:
-		if translation_btn.get_item_text(i) == "%d":
+		if translation_btn.get_item_text(i) == current_translation:
 			translation_btn.select(i)
 			break
 

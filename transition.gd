@@ -12,7 +12,6 @@ func _ready():
 	animation_player.animation_finished.connect(_on_animation_finished)
 	animation_player.speed_scale = transition_speed
 
-	
 func _on_animation_finished(anim_name):
 	if anim_name == "FADE_TO_BLACK":
 		on_transition_finished.emit()

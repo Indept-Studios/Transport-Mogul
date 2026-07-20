@@ -1,5 +1,4 @@
-class_name Contract_Service
-extends Node
+class_name Contract_Service extends Node
 
 func generate_contracts_for(vehicle: Vehicle) -> void:
 	vehicle.available_contracts.clear()

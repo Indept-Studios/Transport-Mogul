@@ -494,3 +494,8 @@ Zeigt alle relevanten Informationen wie Geld, Ruf, Fahrzeuge und Aufträge an un
 Speichert und lädt den Spielzustand (z. B. Geld, Fahrzeuge, Aufträge) persistent als JSON.
 14. Formatting / Display System
 Formatiert Zeitangaben und andere Werte für die UI (z. B. 1h20m, HH:MM:SS) zur besseren Lesbarkeit.
+
+IDEEN
+Unternehmensstufe an Abgeschlossene Aufträge und Umsatz binden
+Payload für den Speicherstand. MetaDaten für die Ladebildschirmanzeige, der eigentliche Spielstand ist im Payload
+Quiz mit Fragen über/um Logistik

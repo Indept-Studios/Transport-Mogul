@@ -15,7 +15,6 @@ config/version="0.1.0"
 run/main_scene="uid://dgtixi54nyyd6"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 boot_splash/show_image=false
-boot_splash/minimum_display_time=2000
 
 [autoload]
 
